@@ -7,5 +7,5 @@ Benvenuto nel sito ufficiale del progetto.
 - [Manuale Utente](manuale.md)
 - [Specifiche del Progetto](specifiche.md)
 - [Design Software](design.md)
-- [Testing](test.md)
+- [Testing](systemtest.md)
 - [JavaDoc](javadoc.md)
