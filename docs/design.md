@@ -1,3 +1,7 @@
+---
+title: Design
+nav_order: 4
+---
 #NONSENSE-GENERATOR 
 
 #DOMAIN MODEL
