@@ -20,7 +20,6 @@
             <li class="js-btn">JavaDoc</li>
         </ul>
     </aside>
-</div>
 Benvenuto nel sito ufficiale del progetto.  
 
 ## Sezioni
@@ -30,3 +29,4 @@ Benvenuto nel sito ufficiale del progetto.
 - [Design Software](design.md)
 - [Testing](systemtest.md)
 - [JavaDoc](javadoc.md)
+</div>
