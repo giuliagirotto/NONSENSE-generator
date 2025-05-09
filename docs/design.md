@@ -2,9 +2,9 @@
 title: Design
 nav_order: 3
 ---
-#NONSENSE-GENERATOR 
+# NONSENSE-GENERATOR 
 
-#DOMAIN MODEL
+# DOMAIN MODEL
 
 Il Domain Model rappresenta le entità principali del nostro programma NONSENSE-Generator e le relazioni tra queste entità.
 
@@ -17,15 +17,15 @@ Descrizione dei concetti principali:
 - Template: struttura per la generazione di frasi nonsense rispettando la grammatica
 - Dictionary: parole aggiuntive utili per la creazione di frasi nonsense
 
-#SYSTEM SEQUENCE DIAGRAM 
+# SYSTEM SEQUENCE DIAGRAM 
 
 I seguenti diagrammi mostrano l'interazione tra l'utente e il sistema:
 //diagramma user story 1
 //diagramma user story 2 etc
 
-#DESIGN CLASS MODEL
+# DESIGN CLASS MODEL
 
 Descrivo le classi che implementeranno il domain model
 //....
 
-#INTERNAL SEQUENCE DIAGRAMS
+# INTERNAL SEQUENCE DIAGRAMS
