@@ -1,4 +1,7 @@
-[Home](index.md) | [Manuale](manuale.md) | [Specifiche](specifiche.md) | [Design](design.md) | [Testing](systemtest.md) | [JavaDoc](javadoc.md)
+---
+title: Home
+nav_order: 1
+---
 
 Benvenuto nel sito ufficiale del progetto.  
 
