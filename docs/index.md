@@ -10,16 +10,7 @@
         </li>
     </ul>
 </nav>
-<div class="wrapper">
-    <aside class="doc__nav">
-        <ul>
-            <li class="js-btn selected">Manual</li>
-            <li class="js-btn">Specifications</li>
-            <li class="js-btn">Design</li>
-            <li class="js-btn">Testing</li>
-            <li class="js-btn">JavaDoc</li>
-        </ul>
-    </aside>
+
 Benvenuto nel sito ufficiale del progetto.  
 
 ## Sezioni
@@ -29,4 +20,3 @@ Benvenuto nel sito ufficiale del progetto.
 - [Design Software](design.md)
 - [Testing](systemtest.md)
 - [JavaDoc](javadoc.md)
-</div>
