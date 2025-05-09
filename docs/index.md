@@ -1,4 +1,4 @@
-[Home](index.md)|[Manuale](manuale.md)|[Specifiche](specifiche.md)[Design](design.md)|[Testing](systemtest.md)|[JavaDoc](javadoc.md)
+[Home](index.md) | [Manuale](manuale.md) | [Specifiche](specifiche.md) | [Design](design.md) | [Testing](systemtest.md) | [JavaDoc](javadoc.md)
 
 Benvenuto nel sito ufficiale del progetto.  
 
