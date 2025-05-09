@@ -10,7 +10,7 @@
         </li>
     </ul>
 </nav>
-
+</div>
 Benvenuto nel sito ufficiale del progetto.  
 
 ## Sezioni
