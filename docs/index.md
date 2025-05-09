@@ -1,5 +1,3 @@
-# Nonsense Generator – Documentazione
-
 Benvenuto nel sito ufficiale del progetto.  
 
 ## Sezioni
