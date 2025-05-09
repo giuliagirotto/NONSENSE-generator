@@ -10,3 +10,4 @@ Il *Nonsense Generator* è un’applicazione Java che genera frasi grammaticalme
 - Java 17+
 - Maven
 - Connessione internet (per usare le API Google NLP)
+.
