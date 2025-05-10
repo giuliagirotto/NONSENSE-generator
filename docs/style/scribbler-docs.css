@@ -44,7 +44,7 @@ html, body {
   bottom: 0;
   width: 28%;
   background-color:var(--bg-color);
-  z-index: -1;
+  z-index: 10;
   padding-top: 20px;
   padding-bottom: 15px;
   border: 2px solid red;  /* Bordo rosso per vedere il div */
