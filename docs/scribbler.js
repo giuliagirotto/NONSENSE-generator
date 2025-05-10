@@ -166,11 +166,11 @@ document.addEventListener('DOMContentLoaded', function() {
     window.location.href = link;
   }
 
-  document.getElementById('downloadButton1').addEventListener('click', function() {
+  /*document.getElementById('downloadButton1').addEventListener('click', function() {
     getZipFile(this);
   });
 
   document.getElementById('downloadButton2').addEventListener('click', function() {
     getZipFile(this);
-  });
+  });*/
 });
