@@ -47,6 +47,7 @@ html, body {
   z-index: -1;
   padding-top: 20px;
   padding-bottom: 15px;
+  border: 2px solid red;  /* Bordo rosso per vedere il div */
 }
 
 .doc__nav {
