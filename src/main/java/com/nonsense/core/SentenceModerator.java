@@ -6,7 +6,7 @@ import com.nonsense.model.FraseNonSense;
 
 import java.io.IOException;
 
-public class ModeratoreFrasi {
+public class SentenceModerator {
 
     public boolean validate(NonsenseSentence sentence) {
         try (LanguageServiceClient language = LanguageServiceClient.create()) {
