@@ -1,5 +1,45 @@
-<dependency> //dipendenza della libreria client di google
-  <groupId>com.google.cloud</groupId>
-  <artifactId>google-cloud-language</artifactId>
-  <version>2.34.0</version> <!-- o l'ultima versione -->
-</dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.nonsense</groupId>
+    <artifactId>nonsense-generator</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- Spark Java (micro web framework) -->
+        <dependency>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-core</artifactId>
+            <version>2.9.4</version>
+        </dependency>
+      <dependency> //dipendenza della libreria client di google
+          <groupId>com.google.cloud</groupId>
+          <artifactId>google-cloud-language</artifactId>
+          <version>2.34.0</version> <!-- o l'ultima versione -->
+      </dependency>
+  </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Per usare 'mvn exec:java' -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>com.nonsense.Main</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
