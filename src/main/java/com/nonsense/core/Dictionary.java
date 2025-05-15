@@ -4,7 +4,7 @@ import com.nonsense.model.*;
 import java.util.*;
 
 public class Dictionary {
-    private final List<Word> words 
+    private final List<Word> words;
     
     public Dictionary (){
         this.words = new ArrayList<>();
