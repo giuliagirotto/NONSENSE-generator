@@ -319,7 +319,8 @@
             <ol>
                 <li><a href="#UC1" style="color: var(--accent-color)">Enter Initial Sentence</a></li>
                 <li><a href="#UC2" style="color: var(--accent-color)">Selection Number of Output Sentences</a></li>
-               
+                <li><a href="#UC3" style="color: var(--accent-color)">View Generated Sentences</a></li>
+                <li><a href="#UC4" style="color: var(--accent-color)">Toxicity Check</a></li>
             </ol>
 
             <!--TABELLA UC1-->
@@ -358,6 +359,124 @@
                 <tr>
                     <td><b>Note</b></td>
                     <td>-</td>
+                </tr>
+            </table>
+
+              <!--TABELLA UC2-->
+            <table>
+                <tr>
+                    <th><b id="UC2">Use Case 2</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Selection Number of Output Sentences</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>User</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>The user selects the desired amount of nonsense sentences to output.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>The user selects the number of nonsense sentences.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>No sentence is entered, so nothing is generated.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>System is ready to generate the specified number of sentences.</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+             <!--TABELLA UC3-->
+            <table>
+                <tr>
+                    <th><b id="UC3">Use Case 3</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>View Generated Sentences</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>User</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>The user views the number of nonsense sentences generated as output.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>The user must have entered an input sentence and selected the number of nonsense sentences to generate.</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>After clicking the “Generate” button, the user sees the generated nonsense sentences displayed as output.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>If the user has not entered both the input sentence and the number of desired output sentences,
+                        then no sentences will be generated or displayed.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+             <!--TABELLA UC4-->
+            <table>
+                <tr>
+                    <th><b id="UC4">Use Case 4</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Toxicity Check</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>Software</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>The system checks that each of the generated sentences doesn't include appropriate content.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>All the requested sentences in output have been generated</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>Sentence is safe, so it's shown in output.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>Sentence is toxic, so warning message is shown instead.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>Google API is used to check each sentence</td>
                 </tr>
             </table>
 
