@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class ModeratoreFrasi {
 
-    public boolean valida(FraseNonSense frase) {
+    public boolean validate(NonsenseSentence sentence) {
         try (LanguageServiceClient language = LanguageServiceClient.create()) {
             Document doc = Document.newBuilder()
                     .setContent(frase.toString())
@@ -22,7 +22,7 @@ public class ModeratoreFrasi {
 
             return score > -0.75; // se troppo negativo, la riteniamo tossica
         } catch (IOException e) {
-            System.err.println("Errore nell'analisi della frase: " + e.getMessage());
+            System.err.println("Error analyzing sentence: " + e.getMessage());
             return false; // meglio scartare in caso di errore
         }
     }
