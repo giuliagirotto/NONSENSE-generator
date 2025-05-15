@@ -17,7 +17,7 @@ public class Main {
 
         //analizzo frase
         SentenceAnalyzer analyzer = new SentenceAnalyzer();
-        List<Word> analyzedWords = ana;yzer.analyze(inputSentence(frase);
+        List<Word> analyzedWords = analyzer.analyze(inputSentence(frase);
 
         //creo un dizionario
         Dictionary dictionary = new Dictionary();

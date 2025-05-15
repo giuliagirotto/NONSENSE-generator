@@ -4,28 +4,29 @@ import com.nonsense.model.*;
 
 import java.util.*;
 
-public class GeneratoreFrasi {
-    private final int numeroFrasiOutput;
+public class SentenceGenerator {
+    private final int numberOfSentences;
 
-    public GeneratoreFrasi(int numeroFrasiOutput) {
-        this.numeroFrasiOutput = numeroFrasiOutput;
+    public SentenceGenerator(int numberOfSentences) {
+        this.numberOfSentences = numberOfSentences;
     }
 
-    public List<FraseNonSense> genera(Dizionario dizionario) {
-        List<FraseNonSense> frasi = new ArrayList<>();
+    public List<NonsenseSentence> generate(Dictionary dictionary ) {
+        List<NonsenseSentence> sentences = new ArrayList<>();
 
-        for (int i = 0; i < numeroFrasiOutput; i++) {
-            Parola soggetto = pick(dizionario.getParolePerTipo(TipoParola.NOME));
-            Parola verbo = pick(dizionario.getParolePerTipo(TipoParola.VERBO));
-            Parola complemento = pick(dizionario.getParolePerTipo(TipoParola.NOME));
-            frasi.add(new FraseNonSense(soggetto, verbo, complemento));
+        for (int i = 0; i < numberOfSentences; i++) {
+            Word subject = pick(dictionary.getWordsByType(WordType.NOUN));
+            Word verb = pick(dictionary.getWordsByType(WordType.VERB));
+            Word adjective = pick(dictionary.getWordsByType(WordType.ADJECTIVE));
+            Word adverb = pick(dictionary.getWordsByType(WordType.ADVERB));
+            sentences.add(new NonsenseSentence(Arrays.asList(subject, verb, adjective, adverb)));
         }
 
-        return frasi;
+        return sentences;
     }
 
-    private Parola pick(List<Parola> parole) {
-        if (parole.isEmpty()) return new Parola("?", TipoParola.NOME);
-        return parole.get(new Random().nextInt(parole.size()));
+    private Word pick(List<Word> words) {
+        if (words.isEmpty()) return new Word("?", WordType.NOUN);
+        return words.get(new Random().nextInt(words.size()));
     }
 }

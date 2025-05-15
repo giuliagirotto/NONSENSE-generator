@@ -4,25 +4,39 @@ import com.nonsense.model.*;
 
 import java.util.*;
 
-public class AnalizzatoreFrasi {
+public class SentenceAnalyzer {
 
-    public List<Parola> analizza(FraseInInput frase) {
+    public List<Word> analyze(InputSentence sentence) {
         // Simulazione dell'analisi grammaticale
-        String[] parole = frase.getTesto().split(" ");
-        List<Parola> risultato = new ArrayList<>();
+        String[] words = sentence.getText().split(" ");
+        List<Word> result = new ArrayList<>();
 
-        for (String p : parole) {
-            TipoParola tipo = inferisciTipo(p);
-            risultato.add(new Parola(p, tipo));
+        for (String w : words) {
+            WordType type = insertType(w);
+            result.add(new Word(w, type));
         }
 
-        return risultato;
+        return result;
     }
 
-    private TipoParola inferisciTipo(String parola) {
-        // Versione semplificata (sostituire con API reale dopo)
-        if (parola.endsWith("a") || parola.endsWith("o")) return TipoParola.NOME;
-        if (parola.endsWith("e")) return TipoParola.VERBO;
-        return TipoParola.AGGETTIVO;
+    private WordType insertType(String word) {
+    String lower = word.toLowerCase();
+
+    if (lower.matches(".*(ion|ment|ness|ity|ship|er|or|ist|hood)$")) {
+        return WordType.NOUN;
     }
+    if (lower.matches(".*(ed|ing|en|ify|ate|ise|ize)$")) {
+        return WordType.VERB;
+    }
+    if (lower.matches(".*(ous|ful|able|al|ic|ive|less|y)$")) {
+        return WordType.ADJECTIVE;
+    }
+    if (lower.matches(".*(ly)$")) {
+        return WordType.ADVERB;
+    }
+
+    // fallback se non riconosciuto, se la parola non viene riconosciuta viene introdotta in una classe predefinita (in questo caso Noun), 
+    //si può creare senno una classe UNKNOWN e mettere li le parola sconosciute (quindi aggiungerla nel file WordType.java)
+    return WordType.NOUN;
+}
 }

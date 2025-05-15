@@ -21,11 +21,18 @@
             <artifactId>spark-core</artifactId>
             <version>2.9.4</version>
         </dependency>
-      <dependency> //dipendenza della libreria client di google
+             <!-- dipendenza della libreria client di google -->
+      <dependency> 
           <groupId>com.google.cloud</groupId>
           <artifactId>google-cloud-language</artifactId>
           <version>2.34.0</version> <!-- o l'ultima versione -->
       </dependency>
+         <!-- Gson per JSON -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
   </dependencies>
 
     <build>

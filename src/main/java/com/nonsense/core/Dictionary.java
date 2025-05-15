@@ -1,44 +1,44 @@
 package com.nonsense.core;
 
-import com.nonsense.model.Parola;
-import com.nonsense.model.TipoParola;
+import com.nonsense.model.*;
 import java.util.*;
 
-public class Dizionario {
-    private final List<Parola> parole 
+public class Dictionary {
+    private final List<Word> words 
     
-    public Dizionario (){
-        this.parole = new ArrayList<>();
+    public Dictionary (){
+        this.words = new ArrayList<>();
     }
-    //controlla se la parola è presente all'interno del dizionario
-    public boolean contiene(Parola parola){
-        return parole.contains(parola);
+    //check if the dictionary contains the specific word
+    public boolean contains(Word word){
+        return words.contains(word);
     }
     
-    //se la parola non è presente nel dizionario la aggiunge al suo interno
-    public void aggiungi(Parola parola) {
-        if (!parole.contains(parola)) {
-            parole.add(parola);
+    //if the word is not there, add it to the dictionary
+    public void add(Word word) {
+        if (!words.contains(word)) {
+            words.add(word);
         }
     }
 
-    //mostra tutte le parole di un tipo grammaticale specifico
-    public List<Parola> getParolePerTipo(TipoParola tipo) {
-        List<Parola> filtrate = new ArrayList<>();
-        for (Parola p : parole) {
-            if (p.getTipo() == tipo) {
-                filtrate.add(p);
+    //show all word of a certain grammatical type
+    public List<Word> getWordsByType(WordType type) {
+        List<Word> filtered = new ArrayList<>();
+        for (Word w : words) {
+            if (w.getType() == type) {
+                filtered.add(w);
             }
         }
-        return filtrate;
+        return filtered;
+    }
+    
+    //show all words in the dictionary
+    public List<Word> getAll() {
+        return words;
     }
 
-    public List<Parola> getTutte() {
-        return parole;
-    }
-
-    //restituisce il numero totale di parole nel dizionario
+    //shows the total numer of words inside the dictionary
     public int size(){
-        return parole.size();
+        return words.size();
     }
 }
