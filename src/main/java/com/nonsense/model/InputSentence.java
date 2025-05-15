@@ -1,22 +1,22 @@
 package com.nonsense.model;
 
 //frase scritta dall'utente come input
-public class FraseInInput {
-    private final String testo;
+public class InputSentence {
+    private final String text;
 
-    public FraseInInput(String testo) {
-        if(testo == null || testo.trim().isEmpty()){
-            throw new IllegalArgumentException("Errore: il testo non può essere vuoto");
+    public InputSentence(String text) {
+        if(text == null || text.trim().isEmpty()){
+            throw new IllegalArgumentException("Error: text cannot be empty");
         }
-        this.testo = testo;
+        this.text = text;
     }
 
-    public String getTesto() {
-        return testo;
+    public String getText() {
+        return text;
     }
 
     @Override
     public String toString(){
-        return testo;
+        return text;
     }
 }
