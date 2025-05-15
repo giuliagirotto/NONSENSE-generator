@@ -10,7 +10,7 @@ public class FraseNonSense {
     }
     
     public List<Parola> getParole() {
-        treturn parole;
+        return parole;
     }
 
     @Override
