@@ -21,4 +21,13 @@ public class Parola {
     public String toString() {
         return testo + " [" + tipo + "]";
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+
+        Parola parola = (Parola) obj;
+        return testo.equalsIgnoreCase(parola.testo) && tipo == parola.tipo;
+    }
 }
