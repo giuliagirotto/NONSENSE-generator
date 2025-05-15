@@ -19,11 +19,23 @@ public class SentenceAnalyzer {
         return result;
     }
 
-   //DA SISTEMARE SEGUENDO LE REGOLE GRAMMATICALI INGLESI
     private WordType insertType(String word) {
-        // Versione semplificata (sostituire con API reale dopo)
-        if (word.endsWith("a") || word.endsWith("o")) return TipoParola.NOME;
-        if (word.endsWith("e")) return TipoParola.VERBO;
-        return TipoParola.AGGETTIVO;
+    String lower = word.toLowerCase();
+
+    if (lower.matches(".*(ion|ment|ness|ity|ship|er|or|ist|hood)$")) {
+        return WordType.NOUN;
     }
+    if (lower.matches(".*(ed|ing|en|ify|ate|ise|ize)$")) {
+        return WordType.VERB;
+    }
+    if (lower.matches(".*(ous|ful|able|al|ic|ive|less|y)$")) {
+        return WordType.ADJECTIVE;
+    }
+    if (lower.matches(".*(ly)$")) {
+        return WordType.ADVERB;
+    }
+
+    // fallback se non riconosciuto
+    return WordType.NAME;
+}
 }
