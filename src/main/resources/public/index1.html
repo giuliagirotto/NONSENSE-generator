@@ -1,41 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Generatore Nonsense</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Nonsense Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    li { margin-bottom: 10px; }
+    button { margin-left: 8px; }
+  </style>
 </head>
 <body>
-  <h1>Generatore di Frasi Nonsense</h1>
-  <div style="text-align: center; margin-top: 50px;">
-  <input type="text" id="myTextInput" placeholder="Inserisci la frase di input..." style="padding: 10px; width: 300px;"><br><br>
+  <h1>Nonsense Generator</h1>
 
-  <button onclick="genera()">Genera</button>
-  <button onclick = "copia()">Copia</button>
-  <button onclick = "reset()">Reset</button>
-  <button onclick = "salva()">Salva</button>
+  <form id="nonsense-form">
+    <input type="text" id="sentence" placeholder="Enter a sentence" required>
+    <input type="number" id="count" placeholder="How many sentences?" required min="1">
+    <button type="submit">Generate</button>
+  </form>
 
-  <p id="risultato"></p>
+  <div id="controls" style="margin-top: 20px; display: none;">
+    <button id="copy-all">Copy All</button>
+    <button id="save-all">Save All</button>
+    <button id="reset">Reset</button>
+  </div>
+
+  <h2>Generated Sentences:</h2>
+  <ul id="output"></ul>
 
   <script>
-    function genera() {
-      fetch('/genera')
-        .then(res => res.text())
-        .then(data => {
-          document.getElementById('risultato').innerText = data;
-        });
+    const form = document.getElementById("nonsense-form");
+    const output = document.getElementById("output");
+    const controls = document.getElementById("controls");
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const sentence = document.getElementById("sentence").value;
+      const count = parseInt(document.getElementById("count").value);
+
+      const res = await fetch("/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sentence, count })
+      });
+
+      const data = await res.json();
+      output.innerHTML = "";
+      controls.style.display = "block";
+
+      data.forEach((s, i) => {
+        const li = document.createElement("li");
+
+        const span = document.createElement("span");
+        span.textContent = s;
+        span.id = `sentence-${i}`;
+
+        const copyBtn = document.createElement("button");
+        copyBtn.textContent = "Copy";
+        copyBtn.onclick = () => copyText(span.textContent);
+
+        const saveBtn = document.createElement("button");
+        saveBtn.textContent = "Save";
+        saveBtn.onclick = () => saveTextAsFile(span.textContent, `sentence-${i + 1}.txt`);
+
+        li.appendChild(span);
+        li.appendChild(copyBtn);
+        li.appendChild(saveBtn);
+        output.appendChild(li);
+      });
+    });
+
+    document.getElementById("copy-all").onclick = () => {
+      const texts = Array.from(output.querySelectorAll("span")).map(span => span.textContent).join("\n");
+      copyText(texts);
+    };
+
+    document.getElementById("save-all").onclick = () => {
+      const texts = Array.from(output.querySelectorAll("span")).map(span => span.textContent).join("\n");
+      saveTextAsFile(texts, "nonsense_sentences.txt");
+    };
+
+    document.getElementById("reset").onclick = () => {
+      document.getElementById("sentence").value = "";
+      document.getElementById("count").value = "";
+      output.innerHTML = "";
+      controls.style.display = "none";
+    };
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied to clipboard");
+      }).catch(err => {
+        alert("Copy failed: " + err);
+      });
     }
-    
-    <script>
-    function copia() {
-      fetch('/copia')
+
+    function saveTextAsFile(text, filename) {
+      const blob = new Blob([text], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.download = filename;
+      link.href = URL.createObjectURL(blob);
+      link.click();
     }
-      
-    <script>
-    function reset() {
-      fetch('/reset')
-    }
-    
   </script>
 </body>
 </html>
-
