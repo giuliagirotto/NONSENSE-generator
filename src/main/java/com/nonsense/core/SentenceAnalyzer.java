@@ -4,25 +4,26 @@ import com.nonsense.model.*;
 
 import java.util.*;
 
-public class AnalizzatoreFrasi {
+public class SentenceAnalyzer {
 
-    public List<Parola> analizza(FraseInInput frase) {
+    public List<Word> analyze(InputSentence sentence) {
         // Simulazione dell'analisi grammaticale
-        String[] parole = frase.getTesto().split(" ");
-        List<Parola> risultato = new ArrayList<>();
+        String[] words = sentence.getText().split(" ");
+        List<Word> result = new ArrayList<>();
 
-        for (String p : parole) {
-            TipoParola tipo = inferisciTipo(p);
-            risultato.add(new Parola(p, tipo));
+        for (String w : words) {
+            WordType type = insertType(w);
+            result.add(new Word(w, type));
         }
 
-        return risultato;
+        return result;
     }
 
-    private TipoParola inferisciTipo(String parola) {
+   //DA SISTEMARE SEGUENDO LE REGOLE GRAMMATICALI INGLESI
+    private WordType insertType(String word) {
         // Versione semplificata (sostituire con API reale dopo)
-        if (parola.endsWith("a") || parola.endsWith("o")) return TipoParola.NOME;
-        if (parola.endsWith("e")) return TipoParola.VERBO;
+        if (word.endsWith("a") || word.endsWith("o")) return TipoParola.NOME;
+        if (word.endsWith("e")) return TipoParola.VERBO;
         return TipoParola.AGGETTIVO;
     }
 }
