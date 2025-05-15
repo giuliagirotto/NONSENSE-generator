@@ -8,11 +8,7 @@ import static spark.Spark.*;
 
 import java.util.*;
 
-<<<<<<< HEAD
-public class Main2 {
-=======
 public class Main {
->>>>>>> e49925bac68f2f0ceab4503038174abbf358f652
 
     public static void main(String[] args) {
         port(4567);
