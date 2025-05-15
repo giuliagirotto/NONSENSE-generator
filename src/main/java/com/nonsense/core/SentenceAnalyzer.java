@@ -35,7 +35,8 @@ public class SentenceAnalyzer {
         return WordType.ADVERB;
     }
 
-    // fallback se non riconosciuto
-    return WordType.NAME;
+    // fallback se non riconosciuto, se la parola non viene riconosciuta viene introdotta in una classe predefinita (in questo caso Noun), 
+    //si può creare senno una classe UNKNOWN e mettere li le parola sconosciute (quindi aggiungerla nel file WordType.java)
+    return WordType.NOUN;
 }
 }
