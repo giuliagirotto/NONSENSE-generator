@@ -1,6 +1,6 @@
 package com.nonsense.model;
 
-public enum tipoParola {
+public enum TipoParola {
     NOME,
     VERBO,
     AGGETTIVO,
