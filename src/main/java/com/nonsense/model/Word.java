@@ -13,7 +13,7 @@ public class Word {
         return text;
     }
 
-    public TipoParola getType() {
+    public WordType getType() {
         return type;
     }
 

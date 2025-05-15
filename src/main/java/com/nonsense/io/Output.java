@@ -1,6 +1,6 @@
 package com.nonsense.io;
 
-import com.nonsense.model.FraseNonSense;
+import com.nonsense.model.NonsenseSentence;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,37 +8,20 @@ import java.util.List;
 
 public class Output {
 
-    public void mostra(List<FraseNonSense> frasi) {
-        for (FraseNonSense f : frasi) {
-            System.out.println(f);
+    public void show(List<NonsenseSentence> sentences) {
+        for (NonsenseSentence s : sentences) {
+            System.out.println(s);
         }
     }
 
-    public void salvaSuFile(List<FraseNonSense> frasi, String filePath) {
+    public void saveToFile(List<NonsenseSentence> sentences, String filePath) {
         try (FileWriter writer = new FileWriter(filePath)) {
-            for (FraseNonSense f : frasi) {
-                writer.write(f.toString() + "\n");
+            for (NonsenseSentence s : sentences) {
+                writer.write(s.toString() + "\n");
             }
-            System.out.println("Frasi salvate in: " + filePath);
+            System.out.println("Sentences saved to: " + filePath);
         } catch (IOException e) {
-            System.err.println("Errore nel salvataggio: " + e.getMessage());
+            System.err.println("Error saving file: " + e.getMessage());
         }
     }
 }
-
-🚀 Esempio aggiornato nel Main.java
-
-// Dopo la generazione
-ModeratoreFrasi moderatore = new ModeratoreFrasi();
-List<FraseNonSense> frasiValide = new ArrayList<>();
-
-for (FraseNonSense f : frasi) {
-    if (moderatore.valida(f)) {
-        frasiValide.add(f);
-    }
-}
-
-output.mostra(frasiValide);
-
-// Salvataggio
-output.salvaSuFile(frasiValide, "frasi_nonsense.txt");

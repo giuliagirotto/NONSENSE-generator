@@ -2,10 +2,10 @@ package com.nonsense.model;
 
 import java.util.*;
 
-public class NonsenseSentence {
+public class NonSenseSentence {
     private final List<Word> words;
     
-    public FraseNonSense(List<Word> words) {
+    public NonSenseSentence(List<Word> words) {
         this.words = words;
     }
     
