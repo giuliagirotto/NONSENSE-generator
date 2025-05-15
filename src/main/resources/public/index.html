@@ -1,1 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generatore Nonsense</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Generatore di Frasi Nonsense</h1>
+  <button onclick="genera()">Genera</button>
+  <p id="risultato"></p>
+
+  <script>
+    function genera() {
+      fetch('/genera')
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById('risultato').innerText = data;
+        });
+    }
+    
+    <script>
+    function copia() {
+      fetch('/copia')
+    }
+      
+    <script>
+    function reset() {
+      fetch('/reset')
+    }
+    
+  </script>
+</body>
+</html>
 
