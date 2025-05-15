@@ -24,7 +24,7 @@
     <ul class="menu" title="link to the repository">
         <div class="menu__item toggle"><span></span></div>
         <li class="menu__item">
-            <a href="https://github.com/bellins14/klotski_gruppo2.git" class="link link--dark">
+            <a href="https://github.com/giuliagirotto/NONSENSE-generator" class="link link--dark">
                 <i class="fa fa-github"></i><span style="margin-left: 4px">Repository GitHub</span>
             </a>
         </li>
@@ -45,7 +45,7 @@
     <article class="doc__content">
         <section class="js-section">
             <h1 class="section__title" style="font-size: 33px;">Manual</h1>
-            <!-- INTRODUZIONE -->
+            <!-- INTRODUCTION -->
             <h2>What's NONSENSE Generator?</h2>
             <p>
                 NONSENSE Generator allows the creation of absurd sentences based on user-provided text input.<br>
@@ -307,9 +307,9 @@
         <hr/>  <!-- ---------------------------------------------------------------------- -->
 
         <section class="js-section">
-            <h1 class="section__title" style="font-size: 33px;">Specifiche</h1>
+            <h1 class="section__title" style="font-size: 33px;">Specifications</h1>
 
-            <!--IMMAGINE USE CASES-->
+            <!--IMAGES USE CASES-->
             <img class="myImg" src="resources/img/diagrams/UseCasesDiagram.png" alt="Use Cases" title="Use Cases"
                  width="100%">
             <div id="myModal" class="modal">
@@ -318,7 +318,7 @@
             </div>
             <ol>
                 <li><a href="#UC1" style="color: var(--accent-color)">Enter Initial Sentence</a></li>
-                <li><a href="#UC2" style="color: var(--accent-color)">Scegliere configurazione iniziale</a></li>
+                <li><a href="#UC2" style="color: var(--accent-color)">Selection Number of Output Sentences</a></li>
                
             </ol>
 
@@ -337,23 +337,23 @@
                 </tr>
                 <tr>
                     <td><b>Description</b></td>
-                    <td>Il giocatore deve visualizzare a video la configurazione corrente.</td>
+                    <td>Input of a sentence which will be syntactically analyzed by the system.</td>
                 </tr>
                 <tr>
                     <td><b>Preconditions</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>Viene mostrata al giocatore l'ultima configurazione presente nello storico.</td>
+                    <td><b>Main Scenario</b></td>
+                    <td>The user enters a sentence in the text box.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
-                    <td>-</td>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>The user does not input a sentence: the system shows an error message.</td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
-                    <td>-</td>
+                    <td><b>Post-Conditions</b></td>
+                    <td>The sentence is stored and parsed for further processing.</td>
                 </tr>
                 <tr>
                     <td><b>Note</b></td>
@@ -361,6 +361,7 @@
                 </tr>
             </table>
 
+            
         </section>
 
         <hr/>
