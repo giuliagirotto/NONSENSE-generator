@@ -11,34 +11,36 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         //ricevo frase in input
-        System.out.println("Inserisci una frase:");
+        System.out.println("Enter a sentence:");
         String input = scanner.nextLine();
-        FraseInInput frase = new FraseInInput(input);
+        InputSentence sentence = new InputSentence(input);
 
         //analizzo frase
-        AnalizzatoreFrasi analizzatore = new AnalizzatoreFrasi();
-        List<Parola> parole = analizzatore.analizza(frase);
+        SentenceAnalyzer analyzer = new SentenceAnalyzer();
+        List<Word> analyzedWords = ana;yzer.analyze(inputSentence(frase);
 
         //creo un dizionario
-        Dizionario dizionario = new Dizionario();
-        for (Parola p : parole) {
-            dizionario.aggiungi(p);
+        Dictionary dictionary = new Dictionary();
+        for (Word w : analyzedWords) {
+            dictionary.add(w);
         }
 
         //richiedo quante frasi l'utente vuole generare  
-        System.out.println("Quante frasi nonsense vuoi generare?");
+        System.out.println("\nHow many nonsense sentences would you like to generate?");
         int n = Integer.parseInt(scanner.nextLine());
 
         //genero frasi nonsense
-        GeneratoreFrasi generatore = new GeneratoreFrasi(n);
-        List<FraseNonSense> frasi = generatore.genera(parole, dizionario);
+        SentenceGenerator generator = new SentenceGenerator(n);
+        List<NonsenseSentence> sentences = generator.generate(analyzedWords, dictionary);
 
         //controllo tossicità
-        ModeratoreFrasi moderatore = new ModeratoreFrasi();
-        frasi.removeIf(frase -> !moderatore.valida(frase));
+        SentenceModerator moderator = new SentenceModerator();
+        sentence.removeIf(sentence -> !moderator.validate(sentence));
 
         //output
-        Output output = new Output();
-        output.mostra(frasi);
+       System.out.println("\nGenerated nonsense sentences: ");
+        for (NonsenseSentence s : sentences){
+            System.out.println("- " + s);
+        }
     }
 }
