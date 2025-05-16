@@ -321,6 +321,9 @@
                 <li><a href="#UC2" style="color: var(--accent-color)">Selection Number of Output Sentences</a></li>
                 <li><a href="#UC3" style="color: var(--accent-color)">View Generated Sentences</a></li>
                 <li><a href="#UC4" style="color: var(--accent-color)">Toxicity Check</a></li>
+                <li><a href="#UC5" style="color: var(--accent-color)">Reset the generator</a></li>
+                <li><a href="#UC6" style="color: var(--accent-color)">Copy the sentences</a></li>
+                <li><a href="#UC7" style="color: var(--accent-color)">Save Input Sentence to Text File</a></li>
             </ol>
 
             <!--TABELLA UC1-->
@@ -477,6 +480,123 @@
                 <tr>
                     <td><b>Note</b></td>
                     <td>Google API is used to check each sentence</td>
+                </tr>
+            </table>
+
+             <!--TABELLA UC5-->
+            <table>
+                <tr>
+                    <th><b id="UC5">Use Case 5</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Reset the generator</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>Software</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>When the user clicks the “Reset” button, all previously generated nonsense sentences are removed.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>The “Reset” button has been clicked.</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>All generated nonsense sentences up to that moment are cleared from the interface.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>If the user has not entered anything, the reset action has no effect.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <!--TABELLA UC6-->
+            <table>
+                <tr>
+                    <th><b id="UC6">Use Case 6</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Copy the sentences</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>Software</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>When the user clicks the “Reset” button, all previously generated nonsense sentences are removed.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>The user has selected which sentences they want to copy.</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>The user is allowed to copy a specific sentence or all generated sentences.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>Copying is not allowed.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <!--TABELLA UC7-->
+            <table>
+                <tr>
+                    <th><b id="UC7">Use Case 7</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Save Input Sentence to Text File</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>User</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>The words from the user’s input sentence are saved to the software’s internal dictionary.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>The user has entered an input sentence, selected the number of output sentences, and clicked the “Generate” button.</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>The user enters a sentence, which is then analyzed.<br>The extracted words are saved to the software’s dictionary for future use in generating nonsense sentences.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>If the input sentence field is left empty, the system displays an error message.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>Words are saved in a .txt text file.</td>
                 </tr>
             </table>
 
