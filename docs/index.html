@@ -324,6 +324,7 @@
                 <li><a href="#UC5" style="color: var(--accent-color)">Reset the generator</a></li>
                 <li><a href="#UC6" style="color: var(--accent-color)">Copy the sentences</a></li>
                 <li><a href="#UC7" style="color: var(--accent-color)">Save Input Sentence to Text File</a></li>
+                <li><a href="#UC8" style="color: var(--accent-color)">Save Words to Software Dictionary</a></li>
             </ol>
 
             <!--TABELLA UC1-->
@@ -597,6 +598,45 @@
                 <tr>
                     <td><b>Note</b></td>
                     <td>Words are saved in a .txt text file.</td>
+                </tr>
+            </table>
+
+            <!--TABELLA UC8-->
+            <table>
+                <tr>
+                    <th><b id="UC8">Use Case 8</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Save Words to Software Dictionary</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>Software</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>Automatic saving of the words from the user’s input sentence into the software’s internal dictionary.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>The system checks the quality of the input: no empty strings or whitespace-only entries are allowed.</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>The user enters a sentence, which is analyzed.<br> The extracted words are saved to the internal dictionary so they can be reused in the generation of nonsense sentences.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>If the input sentence field is left empty, the system displays an error message.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>Data persistence: the saved words must remain available even after the program is closed.</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>The saved words must be actively used in future generations, at least one saved word should appear in each generated sentence.</td>
                 </tr>
             </table>
 
