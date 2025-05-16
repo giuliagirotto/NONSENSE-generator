@@ -54,6 +54,7 @@
                 The generated sentences are then subjected to a toxicity check through integration with the Google Cloud APIs, to ensure safe and appropriate content.<br>
                 The project also includes features such as regeneration, file saving, copy to clipboard, and interface reset, in order to offer a complete and interactive user experience.
             </p>
+            <p>METTERE FOTO ANTEPRIMA GENERATORE</p>
             <div class="span-h2"></div>
 
 
@@ -77,7 +78,7 @@
                 </tr>
             </table>
             <p>
-                It is recommended to also consult the attached <b>Javadoc</b>Javadoc in order to better understand the integration of the libraries.
+                It is recommended to also consult the section <a href="#JavaDoc">Javadoc</a> in order to better understand the integration of the libraries.
             </p>
             <div class="span-h2"></div>
 
@@ -88,64 +89,41 @@
                 in order to tackle the design and development phases rigorously.
             </p>
             <p>
-                After completing the <a href="#specifications">specification<a> and <a href="#design">design</a> phase, the development of the sentence generator began.
-            </p>
-            <p>
-                L’idea principale, che è alla base della realizzazione delle funzionalità del software, è stata quella
-                di
-                utilizzare il concetto di “configurazione”, rappresentante l’insieme dei pezzi che compongono il puzzle
-                e le
-                loro posizioni in un determinato momento (o mossa).
+                After completing the <a href="#specifications">specification</a> and <a href="#design">design</a> phase, the development of the sentence generator began.
             </p>
             <div class="span-h3"></div>
 
-            <h3>Interfaccia grafica</h3>
+            <h3>Graphic Interface</h3>
+            <p>DA COMPLETARE</p>
+            <div class="span-h3"></div>
 
-            <h3>Resettare la partita </h3>
+            <h3>Generate the required sentences</h3>
             <p>
-                Tramite l’apposito bottone, è possibile resettare la partita visualizzando la
-                configurazione dalla quale si era iniziato a giocare.
+                Using the button "Generate", it's possible to generate the requested amount of nonsense sentences from the given sentence.
             </p>
             <div class="span-h3"></div>
 
-            <h3>Tornare indietro di una mossa</h3>
+            <h3>Reset the generator</h3>
             <p>
-                Tramite l’apposito bottone, è possibile tornare indietro di una mossa; questa operazione è implementata
-                tramite
-                l’eliminazione dell’ultima configurazione dallo storico e la visualizzazione della penultima.
+                Using the button "Reset", it's possible to reset the generator to start the insertion again.
             </p>
             <div class="span-h3"></div>
 
-            <h3>Next best move</h3>
+            <h3>Copy the generated sentences</h3>
             <p>
-                Tramite l’apposito bottone, è possibile fare eseguire al gioco la miglior mossa possibile partendo dallo
-                stato
-                in cui si trova la partita quando la NBM viene richiesta. La logica che permette di usufruire di questa
-                funzionalità è implementata da un sistema esterno
-                (<a href="https://unpkg.co/klotski/dist/klotski.min.js"
-                    target="_blank">link allo script</a>).
-                La connessione fra quest'ultimo e il software è stata creata tramite due classi di JavaFX: WebView,
-                per “mappare” il contenuto di una pagina web, e WebEngine, per modificare una pagina web tramite
-                WebView.
-                Con questa infrastruttura è stato possibile interrogare il sistema esterno ed elaborare la sua risposta.
-                La configurazione risultante viene memorizzata nello storico come mossa.
+                Using the button "Copy", it's possible to copy the generated sentences, either individually or all together.
             </p>
             <div class="span-h3"></div>
-
-            <h3>Counter delle mosse effettuate</h3>
+           
+            <h3>Save the generated sentences</h3>
             <p>
-                E’ previsto un "counter" per il conteggio delle mosse di una partita, il quale corrisponde alla
-                dimensione
-                dello storico senza tenere conto della configurazione iniziale (segue questa logica per tutte le altre
-                funzionalità).
+                Using the button "Save", it's possible to save the generated sentences in a text file.
             </p>
             <div class="span-h3"></div>
 
             <p>
-                Al termine dello sviluppo, è stato svolto un refactoring del codice per permettere un testing efficiente
-                e
-                rigoroso, anche tramite JUnit (le "deliverables" relative al testing sono disponibili nelle sezioni
-                successive).
+                At the end of the development, code refactoring was performed to enable efficient <a href="#test">testing</a>, 
+                including the use of JUnit. 
             </p>
             <div class="span-h2"></div>
 
@@ -217,10 +195,6 @@
                 Per l’esecuzione è necessaria l'installazione della <b>jdk</b> (preferibilmente <b>versione 20</b>).
             </p>
             <div class="span-h2"></div>
-
-            <!-- COME GIOCARE -->
-            <h2>Come giocare</h2>
-         
 
             <!-- DESIGN PATTERNS -->
             <h2>Design Patterns</h2>
@@ -663,7 +637,7 @@
         <hr/>
 
         <section class="js-section">
-            <h2 class="section__title" style="font-size: 33px;">Test</h2>
+            <h2 class="section__title" style="font-size: 33px;" id="test">Test</h2>
 
             <div id="contenitore">
                 <div class="contenuto">
@@ -699,7 +673,7 @@
 
 
         <section class="js-section">
-            <h1 class="section__title" style="font-size: 33px;">JavaDoc</h1>
+            <h1 class="section__title" style="font-size: 33px;" id="JavaDoc">JavaDoc</h1>
             <figure>
                 <a href="resources/Javadoc/com.klotski.app/module-summary.html" target="_blank">
                     <img src="resources/img/icons/JavaDoc.jfif" width="20%" height="20%" title="Java Doc" alt="Java Doc"
