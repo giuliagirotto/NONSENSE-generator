@@ -4,8 +4,10 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 
 public class Dictionary {
 
@@ -36,4 +38,24 @@ public class Dictionary {
             writer.newLine();
         }
     }
+
+    // Assuming you want to load words from files in the baseDir, one word per line, with the filename as the type label
+    public List<Word> getWordsByType(WordType type) {
+        List<Word> result = new ArrayList<>();
+        Path filePath = baseDir.resolve(type.name() + ".txt");
+        if (Files.exists(filePath)) {
+            try {
+                List<String> lines = Files.readAllLines(filePath);
+                for (String line : lines) {
+                    if (!line.isBlank()) {
+                        result.add(new Word(line, type));
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException("Errore nella lettura del file: " + filePath, e);
+            }
+        }
+        return result;
+    }
+
 }
