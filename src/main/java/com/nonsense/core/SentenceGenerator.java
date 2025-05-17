@@ -5,16 +5,16 @@ import com.nonsense.model.*;
 import java.util.*;
 
 public class SentenceGenerator {
-    private final int numberOfSentences;
+    private final NumeroFrasiOutput numberOfSentences;
 
-    public SentenceGenerator(int numberOfSentences) {
+    public SentenceGenerator(NumeroFrasiOutput numberOfSentences) {
         this.numberOfSentences = numberOfSentences;
     }
 
     public List<NonsenseSentence> generate(com.nonsense.model.Dictionary dictionary ) {
         List<NonsenseSentence> sentences = new ArrayList<>();
 
-        for (int i = 0; i < numberOfSentences; i++) {
+        for (int i = 0; i < numberOfSentences.getValue(); i++) {
             Word subject = pick(dictionary.getWordsByType(WordType.NOUN));
             Word verb = pick(dictionary.getWordsByType(WordType.VERB));
             Word adjective = pick(dictionary.getWordsByType(WordType.ADJECTIVE));
