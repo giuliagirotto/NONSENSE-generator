@@ -11,7 +11,7 @@ public class SentenceModerator {
     public boolean validate(NonsenseSentence sentence) {
         try (LanguageServiceClient language = LanguageServiceClient.create()) {
             Document doc = Document.newBuilder()
-                    .setContent(frase.toString())
+                    .setContent(sentence.toString())
                     .setType(Type.PLAIN_TEXT)
                     .build();
 
