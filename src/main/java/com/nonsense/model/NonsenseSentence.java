@@ -2,10 +2,12 @@ package com.nonsense.model;
 
 import java.util.*;
 
-public class NonSenseSentence {
+import org.hibernate.engine.internal.Collections;
+
+public class NonsenseSentence {
     private final List<Word> words;
     
-    public NonSenseSentence(List<Word> words) {
+    public NonsenseSentence(List<Word> words) {
         this.words = words;
     }
     
@@ -17,7 +19,7 @@ public class NonSenseSentence {
     public String toString() {
         String sentence = words.stream()
             .map(Word::getText)
-            .collect(Collectors.joining(" "));
+            .collect(Collections.joining(" "));
 
         if (!sentence.isEmpty()){
             sentence = sentence.substring(0,1).toUpperCase() + sentence.substring(1) + ".";

@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NONSENSE Generator - Doc</title>
-    <link rel="shortcut icon" type="x-icon" href="resources/img/icons/piece3.png">
+    <link rel="shortcut icon" type="x-icon" href="resources/img/icons/logo1.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="style/scribbler-global.css">
@@ -20,11 +20,11 @@
 <body>
 <div class="doc__bg"></div>
 <nav class="header">
-    <h1 class="logo">NONSENSE Generator<span class="logo__thin">Documentation</span></h1>
+    <h1 class="logo">NONSENSE Generator<br><span class="logo__thin">Documentation</span></h1>
     <ul class="menu" title="link to the repository">
         <div class="menu__item toggle"><span></span></div>
         <li class="menu__item">
-            <a href="https://github.com/bellins14/klotski_gruppo2.git" class="link link--dark">
+            <a href="https://github.com/giuliagirotto/NONSENSE-generator" class="link link--dark">
                 <i class="fa fa-github"></i><span style="margin-left: 4px">Repository GitHub</span>
             </a>
         </li>
@@ -45,7 +45,7 @@
     <article class="doc__content">
         <section class="js-section">
             <h1 class="section__title" style="font-size: 33px;">Manual</h1>
-            <!-- INTRODUZIONE -->
+            <!-- INTRODUCTION -->
             <h2>What's NONSENSE Generator?</h2>
             <p>
                 NONSENSE Generator allows the creation of absurd sentences based on user-provided text input.<br>
@@ -54,240 +54,99 @@
                 The generated sentences are then subjected to a toxicity check through integration with the Google Cloud APIs, to ensure safe and appropriate content.<br>
                 The project also includes features such as regeneration, file saving, copy to clipboard, and interface reset, in order to offer a complete and interactive user experience.
             </p>
+            <p>METTERE FOTO ANTEPRIMA GENERATORE</p>
             <div class="span-h2"></div>
 
 
             <!-- TECNOLOGIE UTILIZZATE -->
-            <h2>Tecnologie utilizzate</h2>
+            <h2>Technologies Used</h2>
             <table id="Librerie">
                 <tr>
-                    <th><b>Nome</b></th>
-                    <th><b>Versione</b></th>
-                    <th><b>Descrizione</b></th>
+                    <th><b>Name</b></th>
+                    <th><b>Version</b></th>
+                    <th><b>Description</b></th>
                 </tr>
                 <tr>
                     <td align="center">Java</td>
                     <td align="center">20</td>
-                    <td>Ambiente e linguaggio di programmazione utilizzato per sviluppare l’applicazione.</td>
-                </tr>
-                <tr>
-                    <td align="center">JavaFX</td>
-                    <td align="center">20.0.1</td>
-                    <td>Piattaforma per lo sviluppo di applicazioni client, basata su Java.</td>
-                </tr>
-                <tr>
-                    <td align="center">JFoenix</td>
-                    <td align="center">9.0.1</td>
-                    <td>Libreria Java open source che implementa Google Material Design utilizzando componenti Java.
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">Jackson</td>
-                    <td align="center">2.12.3</td>
-                    <td>Libreria Java per la serializzazione di oggetti Java in oggetti JSON e viceversa.</td>
+                    <td>Programming environment and language used to develop the application.</td>
                 </tr>
                 <tr>
                     <td align="center">JUnit</td>
                     <td align="center">5.9.1</td>
-                    <td>Framework per il testing automatico di classi Java.</td>
-                </tr>
-                <tr>
-                    <td align="center">SceneBuilder</td>
-                    <td align="center">19.0.0</td>
-                    <td>Software per la costruzione di una GUI JavaFX tramite "drag and drop".</td>
+                    <td>Framework for automatic testing of Java classes.</td>
                 </tr>
             </table>
             <p>
-                Si consiglia, alla fine, di consultare anche il <b>Javadoc</b> allegato per capire al meglio
-                l'integrazione delle librerie.
+                It's recommended to also consult the section <a href="#JavaDoc">Javadoc</a> in order to better understand the integration of the libraries.
             </p>
             <div class="span-h2"></div>
 
             <!-- SCARICARE ED INSTALLARE IL SOFTWARE -->
-            <h2>Descrizione del progetto e implementazione delle specifiche</h2>
+            <h2>Project Description and Implementation</h2>
             <p>
-                Nelle prime fasi di sviluppo del progetto sono state discusse e approfondite le specifiche,
-                con l’idea di affrontare le fasi di progettazione e di sviluppo più linearmente possibile.
+                At the beginning of the project development the specifications were discussed and studied 
+                in order to tackle the design and development phases rigorously.
             </p>
             <p>
-                Dopo aver portato a termine la fase di definizione delle specifiche e di design (le quali "deliverables"
-                sono allegate nelle sezioni successive) è stato avviato lo sviluppo vero e proprio dell’applicazione.
-            </p>
-            <p>
-                L’idea principale, che è alla base della realizzazione delle funzionalità del software, è stata quella
-                di
-                utilizzare il concetto di “configurazione”, rappresentante l’insieme dei pezzi che compongono il puzzle
-                e le
-                loro posizioni in un determinato momento (o mossa).
+                After completing the <a href="#specifications">specification</a> and <a href="#design">design</a> phase, the development of the sentence generator began.
             </p>
             <div class="span-h3"></div>
 
-            <h3>Interfaccia grafica e spostamento dei blocchi</h3>
-            <p>
-                Per realizzare la GUI sono stati utilizzati la libreria grafica di JavaFX e il
-                software SceneBuilder per una disposizione più agevole degli elementi grafici e per la successiva
-                generazione
-                del file <code>.fxml</code>, il quale codifica l’interfaccia tramite il linguaggio di markup di JavaFX.
-            </p>
-            <p>
-                I blocchi sono stati implementati tramite l’estensione del componente <code>Rectangle</code> di JavaFX,
-                così da poter gestire la
-                logica dello spostamento di questi ultimi - evitando, per esempio, che si sovrapponessero, o facendo in
-                modo che
-                restassero nei limiti del piano di gioco - semplicemente prelevando le informazioni dagli attributi
-                forniti
-                direttamente dalla libreria.
-            </p>
-            <p>
-                Per completare l’interfaccia sono stati aggiunti dei bottoni, selezionati tra i componenti JFoenix. A
-                ciascun
-                bottone è stata associata una funzionalità, ognuna delle quali è stata implementata tramite una logica
-                innescata da eventi scatenati dall’utente compiendo determinate azioni sulla GUI.
-            </p>
+            <h3>Graphic Interface</h3>
+            <p>DA COMPLETARE</p>
             <div class="span-h3"></div>
 
-            <h3>Possibilità di salvare lo stato corrente e di ripristinarlo</h3>
-            <p>
-                Questa funzionalità è strettamente collegata alle altre. Per memorizzare lo stato corrente e permettere
-                il
-                suo ripristino una volta chiusa e riaperta l’applicazione, si è pensato di tenere traccia, tramite uno
-                "stack",
-                delle varie configurazioni generate ogni volta che un singolo blocco viene spostato. La memorizzazione
-                di questo
-                storico avviene su file JSON, il quale si aggiorna ad ogni mossa. Per gestire la scrittura e la lettura
-                su file
-                è stata utilizzata la libreria Jackson.
-            </p>
+            <h3>Generate</h3>
+            <table>
+                <tr>
+                    <td><b>Generate the required sentences</b></td>
+                    <td>Using the button "Generate", it's possible to generate the requested amount of nonsense sentences from the given sentence.</td>
+                </tr>
+            </table>
             <div class="span-h3"></div>
-
-            <h3>Scegliere fra diverse configurazioni di partenza</h3>
-            <p>
-                Ad alcuni bottoni è stata associata la funzionalità di cambio configurazione. Le configurazioni
-                iniziali selezionabili sono memorizzate all’interno del codice.<br>
-                <cite> Notare che il cambio di configurazione comporta un reset dello storico.</cite>
-            </p>
+            <h3>Reset</h3>
+            <table>
+                <tr>
+                    <td><b>Reset the generator</b></td>
+                    <td>Using the button "Reset", it's possible to reset the generator to start the insertion again.</td>
+                </tr>
+            </table>
             <div class="span-h3"></div>
-
-            <h3>Resettare la partita </h3>
-            <p>
-                Tramite l’apposito bottone, è possibile resettare la partita visualizzando la
-                configurazione dalla quale si era iniziato a giocare.
-            </p>
+            <h3>Copy</h3>
+            <table>
+                <tr>
+                    <td><b>Copy the generated sentences</b></td>
+                    <td>Using the button "Copy", it's possible to copy the generated sentences, either individually or all together.</td>
+                </tr>
+            </table>
             <div class="span-h3"></div>
-
-            <h3>Tornare indietro di una mossa</h3>
-            <p>
-                Tramite l’apposito bottone, è possibile tornare indietro di una mossa; questa operazione è implementata
-                tramite
-                l’eliminazione dell’ultima configurazione dallo storico e la visualizzazione della penultima.
-            </p>
-            <div class="span-h3"></div>
-
-            <h3>Next best move</h3>
-            <p>
-                Tramite l’apposito bottone, è possibile fare eseguire al gioco la miglior mossa possibile partendo dallo
-                stato
-                in cui si trova la partita quando la NBM viene richiesta. La logica che permette di usufruire di questa
-                funzionalità è implementata da un sistema esterno
-                (<a href="https://unpkg.co/klotski/dist/klotski.min.js"
-                    target="_blank">link allo script</a>).
-                La connessione fra quest'ultimo e il software è stata creata tramite due classi di JavaFX: WebView,
-                per “mappare” il contenuto di una pagina web, e WebEngine, per modificare una pagina web tramite
-                WebView.
-                Con questa infrastruttura è stato possibile interrogare il sistema esterno ed elaborare la sua risposta.
-                La configurazione risultante viene memorizzata nello storico come mossa.
-            </p>
-            <div class="span-h3"></div>
-
-            <h3>Counter delle mosse effettuate</h3>
-            <p>
-                E’ previsto un "counter" per il conteggio delle mosse di una partita, il quale corrisponde alla
-                dimensione
-                dello storico senza tenere conto della configurazione iniziale (segue questa logica per tutte le altre
-                funzionalità).
-            </p>
+            <h3>Save</h3>
+            <table>
+                <tr>
+                    <td><b>Save the generated sentences</b></td>
+                    <td>Using the button "Save", it's possible to save the generated sentences in a text file.</td>
+                </tr>
+            </table>
             <div class="span-h3"></div>
 
             <p>
-                Al termine dello sviluppo, è stato svolto un refactoring del codice per permettere un testing efficiente
-                e
-                rigoroso, anche tramite JUnit (le "deliverables" relative al testing sono disponibili nelle sezioni
-                successive).
+                At the end of the development, code refactoring was performed to enable efficient <a href="#test">testing</a>, 
+                including the use of JUnit. 
             </p>
             <div class="span-h2"></div>
 
             <!-- SCARICARE ED INSTALLARE IL SOFTWARE -->
-            <h2>Scaricare ed installare il software</h2>
-            <h3>Jar</h3>
-            <p>
-                Per <b>scaricare il programma</b> in formato <code>.jar</code>, cliccare sul bottone Windows o macOS:
-            </p>
-
-            <div style="display: flex; justify-content: center; align-items: center;">
-                <!-- Mettere il link download del jar -->
-
-                <button id="downloadButton1" title="windows version" type="button" class="btn-primary" style="margin-left: 20px"
-                    data-url="https://github.com/bellins14/klotski_gruppo2/releases/download/v0.0.0/klotski_gruppo2-windows.zip"
-                    data-file="klotski_gruppo2-windows.zip" onclick="getZipFile(this)">
-                    <i class="fa fa-windows" style="font-size: 30px; color: var(--primary-color)"></i>
-                </button>
-
-                <button id="downloadButton2" title="macOS version" type="button" class="btn-primary" style="margin-left: 20px"
-                data-url="https://github.com/bellins14/klotski_gruppo2/releases/download/v0.0.1/klotski_gruppo2-macOS.zip"
-                data-file="klotski_gruppo2-macOS.zip"
-                onclick="getZipFile(this)">
-                <i class="fa fa-apple" style="font-size: 30px; color: var(--primary-color)"></i></button>
-            </div>
-
-            <p>
-                Una volta terminato il download del file <code>.zip</code>, estrarne il contenuto in una locazione a
-                piacere all’interno
-                del proprio dispositivo. Sarà presente una directory contenente una cartella e un file:
-            </p>
-            <ul>
-                <li>
-                    <b>/klotski_files</b>, nella quale sono contenuti i file necessari per il salvataggio delle partite
-                    e la richiesta della NBM. È stato scelto di allocarli esternamente poiché non era possibile renderizzarli
-                    ed utilizzarli all’interno del file <code>.jar</code>.
-                </li>
-                <br>
-                <li>
-                    <b><code>klotski.jar</code></b>, l'applicazione.
-                </li>
-            </ul>
-            <p>
-                Per avviare l’applicazione, <b>fare doppio click sul file <code>klotski.jar</code></b>. L’esecuzione in
-                questa modalità del programma è possibile <b>previa installazione del JRE</b>.
-            </p>
-            <cite>Per eseguire il file klotski.jar è necessario che sia nella stessa directory della cartella klotski_files.</cite>
-            <cite>Per mancanza di supporti alternativi, si garantisce il funzionamento su Windows 10 e mac-OS Monterey 12.6</cite>
-
-            <br>
-            <h3>Nota: macOS</h3>
-            <p>
-                Se, nel tentativo di eseguire il file .jar appare l'avviso 'Impossibile aprire “klotski.jar” perché proviene da uno sviluppatore non identificato', è possibile eseguirlo ugualmente tramite: Tasto destro > Apri > Apri
-            </p>
-            <div class="span-h3"></div>
-
-
-
-
+            <h2>Download Software</h2>
             <h3>IDE</h3>
             <p>
-                Nel caso ci siano problemi con la precedente modalità d'installazione, si consiglia di <b>clonare la
-                repository
-                presente al link in alto a destra</b>, aprire il progetto scaricato tramite un <b>IDE</b> (ad esempio
-                IntelliJ) ed eseguire il
-                file <code>Main.java</code> presente al seguente percorso:
-                <b>src/main/java/com/klotski/app/Main.java</b>
+                To use the generator you need to clone the <b>repository at the link on the top right side of the page</b>, 
+                then open the project using a <b>IDE</b> and execute the file <code>Main.java</code> at the following path:
+                <b>src/main/java/com/nonsense/Main.java</b>
                 <br><br>
                 Per l’esecuzione è necessaria l'installazione della <b>jdk</b> (preferibilmente <b>versione 20</b>).
             </p>
             <div class="span-h2"></div>
-
-            <!-- COME GIOCARE -->
-            <h2>Come giocare</h2>
-         
 
             <!-- DESIGN PATTERNS -->
             <h2>Design Patterns</h2>
@@ -306,10 +165,10 @@
 
         <hr/>  <!-- ---------------------------------------------------------------------- -->
 
-        <section class="js-section">
-            <h1 class="section__title" style="font-size: 33px;">Specifiche</h1>
+        <section class="js-section" id="specifications">
+            <h1 class="section__title" style="font-size: 33px;">Specifications</h1>
 
-            <!--IMMAGINE USE CASES-->
+            <!--IMAGES USE CASES-->
             <img class="myImg" src="resources/img/diagrams/UseCasesDiagram.png" alt="Use Cases" title="Use Cases"
                  width="100%">
             <div id="myModal" class="modal">
@@ -318,8 +177,13 @@
             </div>
             <ol>
                 <li><a href="#UC1" style="color: var(--accent-color)">Enter Initial Sentence</a></li>
-                <li><a href="#UC2" style="color: var(--accent-color)">Scegliere configurazione iniziale</a></li>
-               
+                <li><a href="#UC2" style="color: var(--accent-color)">Selection Number of Output Sentences</a></li>
+                <li><a href="#UC3" style="color: var(--accent-color)">View Generated Sentences</a></li>
+                <li><a href="#UC4" style="color: var(--accent-color)">Toxicity Check</a></li>
+                <li><a href="#UC5" style="color: var(--accent-color)">Reset the generator</a></li>
+                <li><a href="#UC6" style="color: var(--accent-color)">Copy the sentences</a></li>
+                <li><a href="#UC7" style="color: var(--accent-color)">Save Output Sentences to Text File</a></li>
+                <li><a href="#UC8" style="color: var(--accent-color)">Save Words to Software Dictionary</a></li>
             </ol>
 
             <!--TABELLA UC1-->
@@ -328,7 +192,7 @@
                     <th><b id="UC1">Use Case 1</b></th>
                 </tr>
                 <tr>
-                    <td><b>Use Case Name</b>
+                    <td><b>Use Case Name</b></td>
                     <td>Enter Initial Sentence</td>
                 </tr>
                 <tr>
@@ -337,22 +201,101 @@
                 </tr>
                 <tr>
                     <td><b>Description</b></td>
-                    <td>Il giocatore deve visualizzare a video la configurazione corrente.</td>
+                    <td>Input of a sentence which will be syntactically analyzed by the system.</td>
                 </tr>
                 <tr>
                     <td><b>Preconditions</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>Viene mostrata al giocatore l'ultima configurazione presente nello storico.</td>
+                    <td><b>Main Scenario</b></td>
+                    <td>The user enters a sentence in the text box.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>The user does not input a sentence: the system shows an error message.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>The sentence is stored and parsed for further processing.</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+              <!--TABELLA UC2-->
+            <table>
+                <tr>
+                    <th><b id="UC2">Use Case 2</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Selection Number of Output Sentences</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>User</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>The user selects the desired amount of nonsense sentences to output.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
+                    <td><b>Main Scenario</b></td>
+                    <td>The user selects the number of nonsense sentences.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>No sentence is entered, so nothing is generated.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>System is ready to generate the specified number of sentences.</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+             <!--TABELLA UC3-->
+            <table>
+                <tr>
+                    <th><b id="UC3">Use Case 3</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>View Generated Sentences</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>User</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>The user views the number of nonsense sentences generated as output.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>The user must have entered an input sentence and selected the number of nonsense sentences to generate.</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>After clicking the “Generate” button, the user sees the generated nonsense sentences displayed as output.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>If the user has not entered both the input sentence and the number of desired output sentences,
+                        then no sentences will be generated or displayed.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
@@ -361,19 +304,215 @@
                 </tr>
             </table>
 
+             <!--TABELLA UC4-->
+            <table>
+                <tr>
+                    <th><b id="UC4">Use Case 4</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Toxicity Check</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>Software</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>The system checks that each of the generated sentences doesn't include appropriate content.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>All the requested sentences in output have been generated</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>Sentence is safe, so it's shown in output.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>Sentence is toxic, so warning message is shown instead.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>Google API is used to check each sentence</td>
+                </tr>
+            </table>
+
+             <!--TABELLA UC5-->
+            <table>
+                <tr>
+                    <th><b id="UC5">Use Case 5</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Reset the generator</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>User</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>When the user clicks the “Reset” button, all previously generated nonsense sentences are removed.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>The “Reset” button has been clicked.</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>All generated nonsense sentences up to that moment are cleared from the interface.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>If the user has not entered anything, the reset action has no effect.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <!--TABELLA UC6-->
+            <table>
+                <tr>
+                    <th><b id="UC6">Use Case 6</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Copy the sentences</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>Utente</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>When the user clicks the “Reset” button, all previously generated nonsense sentences are removed.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>The user has selected which sentences they want to copy.</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>The user is allowed to copy a specific sentence or all generated sentences.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>Copying is not allowed.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <!--TABELLA UC7-->
+            <table>
+                <tr>
+                    <th><b id="UC7">Use Case 7</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Save Input Sentence to Text File</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>User</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>The words from the user’s input sentence are saved to the software’s internal dictionary.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>The user has entered an input sentence, selected the number of output sentences, and clicked the “Generate” button.</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>The user enters a sentence, which is then analyzed.<br>The extracted words are saved to the software’s dictionary for future use in generating nonsense sentences.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>If the input sentence field is left empty, the system displays an error message.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>Words are saved in a .txt text file.</td>
+                </tr>
+            </table>
+
+            <!--TABELLA UC8-->
+            <table>
+                <tr>
+                    <th><b id="UC8">Use Case 8</b></th>
+                </tr>
+                <tr>
+                    <td><b>Use Case Name</b>
+                    <td>Save Words to Software Dictionary</td>
+                </tr>
+                <tr>
+                    <td><b>Actors</b></td>
+                    <td>Software</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>Automatic saving of the words from the user’s input sentence into the software’s internal dictionary.</td>
+                </tr>
+                <tr>
+                    <td><b>Preconditions</b></td>
+                    <td>The system checks the quality of the input: no empty strings or whitespace-only entries are allowed.</td>
+                </tr>
+                <tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>The user enters a sentence, which is analyzed.<br> The extracted words are saved to the internal dictionary so they can be reused in the generation of nonsense sentences.</td>
+                </tr>
+                <tr>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>If the input sentence field is left empty, the system displays an error message.</td>
+                </tr>
+                <tr>
+                    <td><b>Post-Conditions</b></td>
+                    <td>Data persistence: the saved words must remain available even after the program is closed.</td>
+                </tr>
+                <tr>
+                    <td><b>Note</b></td>
+                    <td>The saved words must be actively used in future generations, at least one saved word should appear in each generated sentence.</td>
+                </tr>
+            </table>
+
+            
         </section>
 
         <hr/>
 
         <section class="js-section">
-            <h1 class="section__title">Design</h1>
+            <h1 class="section__title" id="design">Design</h1>
             <h2>Domain Model</h2>
             <img class="myImg" src="resources/img/diagrams/DomainModel.png" alt="Domain model" title="Domain model"
                  width="100%">
             <div class="span-h2"></div>
 
             <h2>Design Class Model</h2>
-            <img class="myImg" src="resources/img/diagrams/ClassDiagram(nuovo).png" alt="Design Class Model"
+            <img class="myImg" src="resources/img/diagrams/DesignClassModel.png" alt="Design Class Model"
                  title="zoom picture" width="100%">
 
             <h2>Sequence Diagrams</h2>
@@ -450,7 +589,7 @@
         <hr/>
 
         <section class="js-section">
-            <h2 class="section__title" style="font-size: 33px;">Test</h2>
+            <h2 class="section__title" style="font-size: 33px;" id="test">Test</h2>
 
             <div id="contenitore">
                 <div class="contenuto">
@@ -486,7 +625,7 @@
 
 
         <section class="js-section">
-            <h1 class="section__title" style="font-size: 33px;">JavaDoc</h1>
+            <h1 class="section__title" style="font-size: 33px;" id="JavaDoc">JavaDoc</h1>
             <figure>
                 <a href="resources/Javadoc/com.klotski.app/module-summary.html" target="_blank">
                     <img src="resources/img/icons/JavaDoc.jfif" width="20%" height="20%" title="Java Doc" alt="Java Doc"
