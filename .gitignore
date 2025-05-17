@@ -5,14 +5,10 @@
 *.ear
 
 # === Maven ===
-/target/
+target/
 !.mvn/wrapper/maven-wrapper.jar
-
-# === IntelliJ IDEA ===
-.idea/
-*.iml
-*.iws
-out/
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 # === VS Code ===
 .vscode/
