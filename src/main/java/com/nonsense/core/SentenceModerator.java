@@ -2,7 +2,7 @@ package com.nonsense.core;
 
 import com.google.cloud.language.v1.*;
 import com.google.cloud.language.v1.Document.Type;
-import com.nonsense.model.FraseNonSense;
+import com.nonsense.model.NonsenseSentence;
 
 import java.io.IOException;
 
