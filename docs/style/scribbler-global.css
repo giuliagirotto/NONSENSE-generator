@@ -318,17 +318,18 @@ table td:first-child {
 .wrapper {
   margin: 0 auto;
   width: 70%;
+  background-color: var(--code-bg-color);
 }
 
 .header {
-  background-color: var(--code-bg-color);
+  background-color: var(--primary-color);
 }
 
 .footer {
   text-align: center;
-  background-color: var(--code-bg-color);
+  background-color: var(--primary-color);
   padding: 2rem;
-  color: var(--primary-color);
+  color: var(--white-color);
 }
 
 @keyframes fadeUp {
