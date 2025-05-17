@@ -13,7 +13,6 @@ html, body {
 .wrapper {
   display: flex;
   flex-grow: 1;
-  background-color: var(--code-bg-color);
 }
 
 /* logo */
