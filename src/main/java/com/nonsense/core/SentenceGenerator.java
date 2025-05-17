@@ -5,9 +5,9 @@ import com.nonsense.model.*;
 import java.util.*;
 
 public class SentenceGenerator {
-    private final NumeroFrasiOutput numberOfSentences;
+    private final NumberOutputSentences numberOfSentences;
 
-    public SentenceGenerator(NumeroFrasiOutput numberOfSentences) {
+    public SentenceGenerator(NumberOutputSentences numberOfSentences) {
         this.numberOfSentences = numberOfSentences;
     }
 
