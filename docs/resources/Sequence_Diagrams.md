@@ -4,483 +4,107 @@
 
 ```plantuml
 @startuml
-@startuml
-!theme materia-outline
+actor User
+participant UI
+participant "AnalizzatoreFrasi" as AF
+participant "Dizionario" as D
+participant "GeneratoreFrasi" as GF
+participant "ModeratoreFrasi" as MF
+participant "Output" as O
 
-skinparam ArrowColor #00B4D8
-skinparam BackgroundColor #FFFFFF
-skinparam ArrowColor #00B4D8
-skinparam ActorBorderColor #03045E
-skinparam ActorFontColor #03045E
-skinparam ActorBackgroundColor #CAF0F8
-skinparam ParticipantFontColor #03045E
-skinparam ParticipantBorderColor #03045E
-skinparam ParticipantBackgroundColor #90E0EF
+== Inserimento e analisi frase ==
+User -> UI : insertInitialSentence()
+UI -> AF : analizzaFrase(frase)
+AF -> D : salvaParole(parole)
 
-actor Giocatore
-participant Sistema
+== Selezione numero di frasi ==
+User -> UI : selectNumberOfSentences(n)
 
-Sistema --> Giocatore: mostra(configurazione_corrente,\ncounter)
+== Generazione frasi ==
+UI -> GF : generaFrasi(n, dizionario)
+GF -> D : getParole()
+GF -> GF : creaFrasiRandom()
 
-par
-    Giocatore -> Sistema: muovi(pezzo, direzione)
-    
-    critical 
-      alt vittoria
-        Sistema --> Giocatore: alert "Hai vinto", \nconfigurazione_iniziale \ncounter_azzerato
+== Controllo tossicità ==
+GF -> MF : controllaTossicità(frasi)
+MF -> MF : filtraFrasiSicure()
 
-      else altrimenti
-        Sistema --> Giocatore: configurazione_aggiornata,\n++counter
-      end
-    end
-    
-else 
-    Giocatore -> Sistema: cambia_configurazione(configurazione_alternativa)
-    
-    critical 
-      Sistema --> Giocatore: configurazione_alternativa,\ncounter_azzerato
-    end
-
-else 
-    Giocatore -> Sistema: undo()
-    
-    critical 
-      alt counter > 0 
-        Sistema --> Giocatore: configurazione_precedente,\n--counter
-        
-      else counter == 0
-        Sistema --> Giocatore: alert "Non hai mosso nessun blocco"
-      end
-    end
-    
-else 
-    Giocatore -> Sistema: reset()
-    
-    critical 
-      Sistema --> Giocatore: configurazione_iniziale,\ncounter_azzerato
-    end
-
-else 
-    Giocatore -> Sistema: richiedi_NBM()
-    
-    critical 
-      
-      alt connessione ad internet funzionante
-        Sistema --> Giocatore: configurazione_aggiornata_con_NBM, \n++counter
-        
-      else connessione ad internet non funzionante
-        Sistema --> Giocatore: alert "NBM non disponibile, connetti a internet"
-      end
-    end
-end
+== Visualizzazione ==
+MF -> O : mostra(frasiSicure)
+User -> UI : visualizzaOutput()
 @enduml
 ```
-
 
 
 # Internal Sequence Diagrams
 
 
-## muovi(pezzo, keyCode)
+## Sentence analysis
 
 ![InternalSequenceDiagram1.png](img/diagrams/InternalSequenceDiagram1.png)
 
 ```plantuml
 @startuml
-!theme materia-outline
-autonumber 
+title Internal SD – Analisi Frase & Salvataggio Parole
 
-skinparam ArrowColor #00B4D8
-skinparam ActorBorderColor #03045E
-skinparam ActorFontColor #03045E
-skinparam ActorBackgroundColor #CAF0F8
-skinparam ParticipantFontColor #03045E
-skinparam ParticipantBorderColor #03045E
-skinparam ParticipantBackgroundColor #90E0EF
-skinparam DatabaseBorderColor #03045E
-skinparam DatabaseBackgroundColor #00B4D8
-skinparam DatabaseFontColor #03045E
-skinparam BackgroundColor #FFFFFF
+participant FraseInInput
+participant AnalizzatoreFrasi
+participant Dizionario
+participant Parola
 
-actor Giocatore 
-participant Controller
-participant Game
-participant Piece
-
-
-Giocatore -> Controller: muovi(pezzo, keyCode)
-activate Controller
-Controller -> Game: movePiece(piece, keyCode)
-activate Game
-
-alt keyCode == UP
-Game -> Game: movePieceUp(piece)
-
-Game -> Piece: setLayoutY(piece.getLayoutY - MOVE_AMOUNT)
-activate Piece
-Piece --> Game
-deactivate Piece
-Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-
-else keyCode == DOWN 
-Game -> Game: movePieceDown(piece)
-
-Game -> Piece: setLayoutY(piece.getLayoutY + MOVE_AMOUNT)
-activate Piece
-Piece --> Game
-deactivate Piece
-Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-
-else keyCode == RIGHT 
-Game -> Game: movePieceRight(piece)
-
-Game -> Piece: setLayoutX(piece.getLayoutX + MOVE_AMOUNT)
-activate Piece
-Piece --> Game
-deactivate Piece
-Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-
-else keyCode == LEFT 
-Game -> Game: movePieceLeft(piece)
-
-Game -> Piece: setLayoutX(piece.getLayoutX - MOVE_AMOUNT)
-activate Piece
-Piece --> Game
-deactivate Piece
-Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-
+FraseInInput -> AnalizzatoreFrasi : analizza()
+AnalizzatoreFrasi -> Parola : creaParole()
+loop per ogni parola
+  Parola -> Dizionario : salvaParola(parola)
 end
-
-Game -> Game: checkNotWin()
-Game -> Configuration: pieceToCheck = _configuration.getPieces()[0]
-activate Configuration
-Configuration --> Game: pieceToCheck
-deactivate Configuration
-
-alt pieceToCheck in posizione di vittoria
-Game -> Game: reset();
-Game --> Controller: Exception()
-deactivate Game
-Controller -> Controller: updateBlockPaneAndCounter();
-Controller -> Utility: setAlert("Hai vinto")
-activate Utility
-Utility --> Giocatore: alert "Hai vinto"
-deactivate Utility
-Controller-->Giocatore: configurazione_iniziale \ncounter_azzerato
-
-
-
-else altrimenti
-Controller -> Controller: updateCounter();
-Controller-->Giocatore: configurazione_aggiornata,\n++counter
-deactivate Controller
-end
-
 @enduml
 ```
 
 
-## cambia_configurazione(configurazione_alternativa)
+## Generation of nonsense sentences
 
 ![InternalSequenceDiagram2.png](img/diagrams/InternalSequenceDiagram2.png)
 
 ```plantuml
 @startuml
-!theme materia-outline
+title Internal SD – Generazione Frasi Nonsense
 
-autonumber
-skinparam ArrowColor #00B4D8
-skinparam ActorBorderColor #03045E
-skinparam ActorFontColor #03045E
-skinparam ActorBackgroundColor #CAF0F8
-skinparam ParticipantFontColor #03045E
-skinparam ParticipantBorderColor #03045E
-skinparam ParticipantBackgroundColor #90E0EF
-skinparam DatabaseBorderColor #03045E
-skinparam DatabaseBackgroundColor #00B4D8
-skinparam DatabaseFontColor #03045E
-skinparam BackgroundColor #FFFFFF
+participant GeneratoreFrasi
+participant Dizionario
+participant Parola
+participant FraseNonSense
 
-actor Giocatore 
-participant Controller
-participant Game
-
-
-Giocatore -> Controller: configurationClicked()
-activate Controller
-Controller -> Game: resetToAnotherInitialConf(configurationNumber)
-activate Game
-
-alt configurationNumber == _initialSelectedConf
-Game --> Controller: Exception
-
-else configurationNumber != _initialSelectedConf
-Game -> Configuration: newInitialConfiguration = new Configuration(configurationNumber)
-activate Configuration
-Configuration --> Game: newInitialConfiguration
-deactivate Configuration
-
-Game -> Game: _stackLog.clear() \nsetConfiguration(newInitialConfiguration)
-Game -> Game: updateLogsWithCurrentConfiguration();
-Game -> Game: _moveCounter = 0 \nsetInitialSelectedConf(confNumber)
-Game --> Controller
-deactivate Game
-
-Controller -> Controller: updateBlockPaneAndCounter()
-Controller --> Giocatore: configurazione_alternativa \ncounter_azzerato
-deactivate Controller
-
+GeneratoreFrasi -> Dizionario : getParole()
+loop n volte
+  Dizionario -> Parola : getRandom(tipo)
+  Parola -> FraseNonSense : componi()
 end
+GeneratoreFrasi -> FraseNonSense : ritornaFrasi()
 @enduml
 ```
 
 
-## undo()
+## Toxicity control
 
 ![InternalSequenceDiagram3.png](img/diagrams/InternalSequenceDiagram3.png)
 
 ```plantuml
 @startuml
-!theme materia-outline
-autonumber
+title Internal SD – Controllo Tossicità
 
-skinparam ArrowColor #00B4D8
-skinparam ActorBorderColor #03045E
-skinparam ActorFontColor #03045E
-skinparam ActorBackgroundColor #CAF0F8
-skinparam ParticipantFontColor #03045E
-skinparam ParticipantBorderColor #03045E
-skinparam ParticipantBackgroundColor #90E0EF
-skinparam DatabaseBorderColor #03045E
-skinparam DatabaseBackgroundColor #00B4D8
-skinparam DatabaseFontColor #03045E
-skinparam BackgroundColor #FFFFFF
+participant FraseNonSense
+participant ModeratoreFrasi
+participant GoogleAPI
+participant Output
 
-actor Giocatore 
-participant Controller
-participant Game
-
-Giocatore -> Controller: undo()
-activate Controller
-Controller -> Game: undo()
-activate Game
-
-alt _stackLog.isEmpty()
-Game --> Controller: Exception()
-Controller -> Utility: setAlert("Non hai mosso nessun blocco")
-activate Utility
-Utility --> Giocatore: alert "Non hai mosso nessun blocco"
-deactivate Utility
-
-
-else altrimenti
-Game -> Game: setConfiguration(_stackLog.pop()) 
-Game -> Game: updateLogsWithCurrentConfiguration()
-Game -> Game:_moveCounter--
-Game --> Controller
-deactivate Game
-
-Controller -> Controller: updateBlockPaneAndCounter()
-Controller --> Giocatore: configurazione_precedente,\n--counter
-deactivate Controller
-
+FraseNonSense -> ModeratoreFrasi : inviaFrasi()
+loop per ogni frase
+  ModeratoreFrasi -> GoogleAPI : isTossica(frase)
+  alt frase sicura
+    ModeratoreFrasi -> Output : mostra(frase)
+  else frase tossica
+    ModeratoreFrasi -> Output : mostraWarning()
+  end
 end
-
-@enduml
-```
-
-
-## reset()
-
-![InternalSequenceDiagram4.png](img/diagrams/InternalSequenceDiagram4.png)
-
-```plantuml
-@startuml
-!theme materia-outline
-autonumber
-skinparam ArrowColor #00B4D8
-skinparam ActorBorderColor #03045E
-skinparam ActorFontColor #03045E
-skinparam ActorBackgroundColor #CAF0F8
-skinparam ParticipantFontColor #03045E
-skinparam ParticipantBorderColor #03045E
-skinparam ParticipantBackgroundColor #90E0EF
-skinparam DatabaseBorderColor #03045E
-skinparam DatabaseBackgroundColor #00B4D8
-skinparam DatabaseFontColor #03045E
-skinparam BackgroundColor #FFFFFF
-
-actor Giocatore 
-participant Controller
-participant Game
-
-
-Giocatore -> Controller: reset()
-activate Controller
-Controller -> Game: reset()
-activate Game
-
-Game -> Configuration: newInitialConfiguration = new Configuration(_initialSelectedConf)
-activate Configuration
-Configuration --> Game: newInitialConfiguration
-deactivate Configuration
-Game -> Game: _stackLog.clear() \nsetConfiguration(newInitialConfiguration)
-Game -> Game: updateLogsWithCurrentConfiguration();
-Game -> Game: _moveCounter = 0 
-Game --> Controller
-deactivate Game
-
-Controller -> Controller: updateBlockPaneAndCounter()
-Controller --> Giocatore: configurazione_iniziale \ncounter_azzerato
-deactivate Controller
-
-
-@enduml
-```
-
-
-## richiedi_NBM()
-
-![InternalSequenceDiagram5.png](img/diagrams/InternalSequenceDiagram5.png)
-
-```plantuml
-@startuml
-!theme materia-outline
-autonumber
-skinparam ArrowColor #00B4D8
-skinparam ActorBorderColor #03045E
-skinparam ActorFontColor #03045E
-skinparam ActorBackgroundColor #CAF0F8
-skinparam ParticipantFontColor #03045E
-skinparam ParticipantBorderColor #03045E
-skinparam ParticipantBackgroundColor #90E0EF
-skinparam DatabaseBorderColor #03045E
-skinparam DatabaseBackgroundColor #00B4D8
-skinparam DatabaseFontColor #03045E
-skinparam BackgroundColor #FFFFFF
-
-actor Giocatore 
-participant Controller
-participant Game
-participant Piece
-participant Utility
-actor NBM_Script
-
-
-Giocatore -> Controller: nextBestMove()
-activate Controller
-
-Controller -> Utility : isInternetConnected()
-activate Utility
-
-alt connessione non internet funzionante
-  Utility --> Controller: false
-  deactivate Utility
-
-  Controller -> Utility: setAlert("NBM non disponibile, connetti a internet")
-  activate Utility
-
-  Utility --> Giocatore : alert "NBM non disponibile, connetti a internet" 
-
-
-else connessione ad internet funzionante
-
-Utility --> Controller : true
-deactivate Utility
-
-
-  Controller -> Game: getConfiguration()
-  activate Game
-
-  Game --> Controller: configuration
-  deactivate Game
-  Controller -> Utility : updateHTMLFile(configuration)
-  activate Utility
-
-  Utility --> Controller : 
-  deactivate Utility
-
-  
-  Controller -> Controller : loadHTMLFile()
-  
-  Controller -> NBM_Script : Richiedi NBM
-  activate NBM_Script
-  NBM_Script -> NBM_Script : Calcola NBM
-  
-  NBM_Script --> Controller : NBM
-    deactivate NBM_Script
-
-  
-Controller -> Game: movePiece(piece, keyCode)
-activate Game
-
-alt keyCode == UP
-Game -> Game: movePieceUp(piece)
-
-Game -> Piece: setLayoutY(piece.getLayoutY - MOVE_AMOUNT)
-activate Piece
-Piece --> Game
-deactivate Piece
-Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-
-else keyCode == DOWN 
-Game -> Game: movePieceDown(piece)
-
-Game -> Piece: setLayoutY(piece.getLayoutY + MOVE_AMOUNT)
-activate Piece
-Piece --> Game
-deactivate Piece
-Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-
-else keyCode == RIGHT 
-Game -> Game: movePieceRight(piece)
-
-Game -> Piece: setLayoutX(piece.getLayoutX + MOVE_AMOUNT)
-activate Piece
-Piece --> Game
-deactivate Piece
-Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-
-else keyCode == LEFT 
-Game -> Game: movePieceLeft(piece)
-
-Game -> Piece: setLayoutX(piece.getLayoutX - MOVE_AMOUNT)
-activate Piece
-Piece --> Game
-deactivate Piece
-Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-
-end
-
-Game -> Game: checkNotWin()
-Game -> Configuration: pieceToCheck = _configuration.getPieces()[0]
-activate Configuration
-Configuration --> Game: pieceToCheck
-deactivate Configuration
-
-alt pieceToCheck in posizione di vittoria
-Game -> Game: reset();
-Game --> Controller: Exception()
-deactivate Game
-Controller -> Controller: updateBlockPaneAndCounter();
-Controller -> Utility: setAlert("Hai vinto")
-activate Utility
-Utility --> Giocatore: alert "Hai vinto"
-deactivate Utility
-Controller-->Giocatore: configurazione_iniziale \ncounter_azzerato
-
-
-
-else altrimenti
-Controller -> Controller: updateCounter();
-Controller-->Giocatore: configurazione_aggiornata,\n++counter
-deactivate Controller
-end
-
-end
-
-
-
-
 @enduml
 ```
