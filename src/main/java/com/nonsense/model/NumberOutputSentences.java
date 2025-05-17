@@ -1,9 +1,9 @@
 package com.nonsense.model;
 
-public class NumberOutputSentence {
+public class NumberOutputSentences {
     private final int value;
 
-    public NumberOutputSentence(int value) {
+    public NumberOutputSentences(int value) {
         if (value <= 0) throw new IllegalArgumentException("Must be > 0");
         this.value = value;
     }
