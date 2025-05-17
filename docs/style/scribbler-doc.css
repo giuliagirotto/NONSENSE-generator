@@ -13,7 +13,7 @@ html, body {
 .wrapper {
   display: flex;
   flex-grow: 1;
-  color: var(--primary-color);
+  color: var(--code-bg-color);
 }
 
 /* logo */
@@ -100,7 +100,7 @@ html, body {
     padding-left: 0;
   }
   .doc__nav ul {
-    border-bottom: 1px solid var(--code-bg-color);
+    border-bottom: 1px solid var(--primary-color);
     padding-bottom: 0.5rem;
   }
   .doc__nav ul.fixed {
