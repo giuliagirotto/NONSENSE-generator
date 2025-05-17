@@ -11,7 +11,7 @@ public class SentenceGenerator {
         this.numberOfSentences = numberOfSentences;
     }
 
-    public List<NonsenseSentence> generate(Dictionary dictionary ) {
+    public List<NonsenseSentence> generate(com.nonsense.model.Dictionary dictionary ) {
         List<NonsenseSentence> sentences = new ArrayList<>();
 
         for (int i = 0; i < numberOfSentences; i++) {

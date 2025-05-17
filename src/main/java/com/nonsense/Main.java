@@ -18,22 +18,34 @@ public class Main {
 
         post("/generate", (request, response) -> {
             Gson gson = new Gson();
-            Map<String, Object> body = gson.fromJson(request.body(), Map.class);
+            Map<String, Object> body = gson.fromJson(request.body(), new com.google.gson.reflect.TypeToken<Map<String, Object>>(){}.getType());
 
             String inputSentence = (String) body.get("sentence");
             int n = ((Double) body.get("count")).intValue();
+            String dictionaries = "dictionaries";
 
             InputSentence sentence = new InputSentence(inputSentence);
             SentenceAnalyzer analyzer = new SentenceAnalyzer();
-            List<Word> analyzedWords = analyzer.analyze(sentence);
+            List<String> analyzedWords = analyzer.analyze(sentence); // Ottieni parole dalla frase di partenza
 
-            Dictionary dictionary = new Dictionary();
-            for (Word w : analyzedWords) {
-                dictionary.add(w);
+            com.nonsense.model.Dictionary dictionary = new com.nonsense.model.Dictionary(dictionaries);
+            List<String> dictionaryWords = dictionary.getWordsByTipe(); // Ottieni parole dal dizionario
+
+            List<String> allWords = new ArrayList<>(analyzedWords);
+
+            // Aggiungi parole dal dizionario se servono
+            while (allWords.size() < n) {
+                for (String word : dictionaryWords) {
+                    if (!allWords.contains(word)) {
+                        allWords.add(word);
+                    if (allWords.size() == n) break;
+                }
             }
+}
 
-            SentenceGenerator generator = new SentenceGenerator(n);
-            List<NonsenseSentence> generated = generator.generate(analyzedWords, dictionary);
+// Ora genera le frasi nonsense usando allWords
+SentenceGenerator generator = new SentenceGenerator(n);
+List<NonsenseSentence> generated = generator.generate(allWords, dictionary);
 
             SentenceModerator moderator = new SentenceModerator();
             List<String> results = new ArrayList<>();

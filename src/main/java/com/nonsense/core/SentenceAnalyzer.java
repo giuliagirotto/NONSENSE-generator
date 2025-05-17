@@ -1,42 +1,51 @@
 package com.nonsense.core;
 
-import com.nonsense.model.*;
+import com.google.cloud.language.v1.*;
+import com.google.cloud.language.v1.Document.Type;
+import com.nonsense.model.Dictionary;
+import com.nonsense.model.InputSentence;
 
-import java.util.*;
+import java.io.IOException;
+import java.util.List;
 
 public class SentenceAnalyzer {
 
-    public List<Word> analyze(InputSentence sentence) {
-        // Simulazione dell'analisi grammaticale
-        String[] words = sentence.getText().split(" ");
-        List<Word> result = new ArrayList<>();
+    private final Dictionary dizionario;
 
-        for (String w : words) {
-            WordType type = insertType(w);
-            result.add(new Word(w, type));
+    public SentenceAnalyzer(Dictionary dizionario) {
+        this.dizionario = dizionario;
+    }
+    public SentenceAnalyzer (){
+        this.dizionario = null;
+    }
+
+    public List<String> analyze(InputSentence frase) throws IOException {
+        try (LanguageServiceClient language = LanguageServiceClient.create()) {
+
+            Document doc = Document.newBuilder()
+                    .setContent(frase.toString())
+                    .setType(Type.PLAIN_TEXT)
+                    .build();
+
+            AnalyzeSyntaxRequest request = AnalyzeSyntaxRequest.newBuilder()
+                    .setDocument(doc)
+                    .setEncodingType(EncodingType.UTF16)
+                    .build();
+
+            AnalyzeSyntaxResponse response = language.analyzeSyntax(request);
+            List<Token> tokens = response.getTokensList();
+
+            List<String> words = new java.util.ArrayList<>();
+            for (Token token : tokens) {
+                String parola = token.getText().getContent().toLowerCase();
+                String etichetta = token.getPartOfSpeech().getTag().name();
+                words.add(parola);
+                if (dizionario != null) {
+                    dizionario.salvaParola(etichetta, parola);
+                }
+            }
+            return words;
         }
-
-        return result;
     }
-
-    private WordType insertType(String word) {
-    String lower = word.toLowerCase();
-
-    if (lower.matches(".*(ion|ment|ness|ity|ship|er|or|ist|hood)$")) {
-        return WordType.NOUN;
-    }
-    if (lower.matches(".*(ed|ing|en|ify|ate|ise|ize)$")) {
-        return WordType.VERB;
-    }
-    if (lower.matches(".*(ous|ful|able|al|ic|ive|less|y)$")) {
-        return WordType.ADJECTIVE;
-    }
-    if (lower.matches(".*(ly)$")) {
-        return WordType.ADVERB;
-    }
-
-    // fallback se non riconosciuto, se la parola non viene riconosciuta viene introdotta in una classe predefinita (in questo caso Noun), 
-    //si può creare senno una classe UNKNOWN e mettere li le parola sconosciute (quindi aggiungerla nel file WordType.java)
-    return WordType.NOUN;
 }
-}
+// In questo esempio, la classe SentenceAnalyzer utilizza il client di Google Cloud Natural Language API per analizzare una frase.
