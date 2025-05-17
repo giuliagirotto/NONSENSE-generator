@@ -175,3 +175,26 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+//per il bottone che ti fa tornare ad inizio pagina
+function scrollToTop() {
+  const start = window.scrollY;
+  const duration = 800;
+  const startTime = performance.now();
+
+  function animateScroll(currentTime) {
+    const timeElapsed = currentTime - startTime;
+    const progress = Math.min(timeElapsed / duration, 1);
+    const ease = easeInOutQuad(progress);
+    window.scrollTo(0, start * (1 - ease));
+
+    if (progress < 1) {
+      requestAnimationFrame(animateScroll);
+    }
+  }
+
+  function easeInOutQuad(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+
+  requestAnimationFrame(animateScroll);
+}

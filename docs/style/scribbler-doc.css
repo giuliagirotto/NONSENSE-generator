@@ -6,13 +6,14 @@ html, body {
 
 /* layout */
 .header {
-  border-bottom: 1px solid var(--code-bg-color);
+  border-bottom: 1px solid var(--primary-color);
   grid-template-columns: 1fr 150px 60% 1fr;
 }
 
 .wrapper {
   display: flex;
   flex-grow: 1;
+  background-color: var(--code-bg-color);
 }
 
 /* logo */
@@ -66,7 +67,7 @@ html, body {
 }
 
 .doc__nav li:hover {
-  color: var(--primary-color-light);
+  color: var(--primary-color);
   cursor: pointer;
   transition: color .3s ease-in-out;
 }
@@ -99,7 +100,7 @@ html, body {
     padding-left: 0;
   }
   .doc__nav ul {
-    border-bottom: 1px solid var(--code-bg-color);
+    border-bottom: 1px solid var(--primary-color);
     padding-bottom: 0.5rem;
   }
   .doc__nav ul.fixed {

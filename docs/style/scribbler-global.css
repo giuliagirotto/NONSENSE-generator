@@ -1,7 +1,6 @@
 /* css variables*/
 :root {
   --primary-color: #03045e;
-  --primary-color-light: #0096c7;
   --accent-color: #0077b6;
   --accent-color-light: #90e0ef;
   --accent-color-dark: #023e8a;
@@ -340,4 +339,24 @@ table td:first-child {
   100% {
     transform: translate3d(0,0,0);
   }
+}
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #003366; /* blu scuro */
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s ease;
+  border-radius: 4px; /* angoli leggermente stondati */
+}
+
+#scrollTopBtn:hover {
+  background-color: #03045e;
 }
