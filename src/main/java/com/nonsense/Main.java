@@ -44,7 +44,7 @@ public class Main {
 }
 
 // Ora genera le frasi nonsense usando allWords
-SentenceGenerator generator = new SentenceGenerator(n);
+SentenceGenerator generator = new SentenceGenerator(new NumberOutputSentences(n));
 List<NonsenseSentence> generated = generator.generate(allWords, dictionary);
 
             SentenceModerator moderator = new SentenceModerator();
