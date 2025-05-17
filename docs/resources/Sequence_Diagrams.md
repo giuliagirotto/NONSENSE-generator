@@ -39,7 +39,7 @@ User -> UI : visualizzaOutput()
 # Internal Sequence Diagrams
 
 
-## Sentence analysis
+## Analisi frasi e salvataggio
 
 ![InternalSequenceDiagram1.png](img/diagrams/InternalSequenceDiagram1.png)
 
@@ -61,7 +61,7 @@ end
 ```
 
 
-## Generation of nonsense sentences
+## Generazione di frasi nonsense
 
 ![InternalSequenceDiagram2.png](img/diagrams/InternalSequenceDiagram2.png)
 
@@ -84,7 +84,7 @@ GeneratoreFrasi -> FraseNonSense : ritornaFrasi()
 ```
 
 
-## Toxicity control
+## Controllo tossicità
 
 ![InternalSequenceDiagram3.png](img/diagrams/InternalSequenceDiagram3.png)
 
@@ -106,5 +106,28 @@ loop per ogni frase
     ModeratoreFrasi -> Output : mostraWarning()
   end
 end
+@enduml
+```
+
+## Azioni post-output: reset, copia, salvataggio
+
+![InternalSequenceDiagram4.png](img/diagrams/InternalSequenceDiagram4.png)
+
+```plantuml
+@startuml
+title Internal SD – Azioni Post-Output
+
+participant Output
+participant Clipboard
+participant FileWriter
+
+== Copia frasi ==
+Output -> Clipboard : copia(frasi)
+
+== Reset ==
+Output -> Output : clear()
+
+== Salva su file ==
+Output -> FileWriter : salvaTXT(frasi)
 @enduml
 ```
