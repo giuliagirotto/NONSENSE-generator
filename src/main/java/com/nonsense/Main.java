@@ -41,22 +41,23 @@ public class Main {
                     if (allWords.size() == n) break;
                 }
             }
-}
+        }
 
-// Ora genera le frasi nonsense usando allWords
-SentenceGenerator generator = new SentenceGenerator(new NumberOutputSentences(n));
-List<NonsenseSentence> generated = generator.generate(allWords, dictionary);
-
-            SentenceModerator moderator = new SentenceModerator();
-            List<String> results = new ArrayList<>();
-            for (NonsenseSentence s : generated) {
-                if (moderator.validate(s)) {
-                    results.add(s.toString());
-                }
+        // Ora genera le frasi nonsense usando allWords
+        NumberOutputSentences numberOutput = (NumberOutputSentences) (Object) n;
+        SentenceGenerator generator = new SentenceGenerator(numberOutput);
+        List<NonsenseSentence> generated = generator.generate(allWords, dictionary);
+        
+        SentenceModerator moderator = new SentenceModerator();
+        List<String> results = new ArrayList<>();
+        for (NonsenseSentence s : generated) {
+            if (moderator.validate(s)) {
+                results.add(s.toString());
             }
+        }
 
-            response.type("application/json");
-            return gson.toJson(results);
+        response.type("application/json");
+        return gson.toJson(results);
         });
     }
 }
