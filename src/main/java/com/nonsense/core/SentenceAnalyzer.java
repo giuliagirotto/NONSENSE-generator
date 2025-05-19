@@ -18,7 +18,7 @@ public class SentenceAnalyzer {
      * @param lexicon TemporaryLexicon da popolare in memoria
      * @throws IOException in caso di errore con l'API
      */
-    public void analyzeSyntax(String text, TemporaryLexicon lexicon) throws IOException {
+    public void analyze(String text, TemporaryLexicon lexicon) throws IOException {
         // Creo il documento plain-text
         Document doc = Document.newBuilder()
             .setContent(text)
