@@ -1,3 +1,4 @@
+import io.github.cdimascio.dotenv.Dotenv;
 package com.nonsense;
 
 import com.google.gson.Gson;
@@ -11,6 +12,10 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+        // Carica .env e imposta la variabile per l'autenticazione
+        Dotenv dotenv = Dotenv.load();
+        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", dotenv.get("GOOGLE_APPLICATION_CREDENTIALS"));
+
         port(4567);
 
         // Serve static files (HTML/JS/CSS)
