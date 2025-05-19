@@ -14,3 +14,4 @@ Per usare l'API di analisi grammaticale e moderazione, è necessario avere una c
 2. Crea un progetto, abilita **Cloud Natural Language API**.
 3. Crea una **Service Account** e scarica il file `google-key.json`.
 4. Copia `google-key.json` nella root del progetto (⚠️ **non va su GitHub**).
+
