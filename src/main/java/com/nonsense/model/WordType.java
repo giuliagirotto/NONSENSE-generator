@@ -11,8 +11,7 @@ public enum WordType {
         switch (tag.toUpperCase()){
             case "NOUN": return NOUN;
             case "VERB": return VERB;
-            case "ADJECTIVE": return ADJECTIVE;    
-            case "ADVERB": return ADVERB;
+            case "ADJECTIVE": return ADJECTIVE;
             default: return null;
         }
     }
