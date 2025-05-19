@@ -10,13 +10,13 @@ import java.util.List;
 
 public class SentenceAnalyzer {
 
-    private final Dictionary dizionario;
+    private final Dictionary dictionary;
 
-    public SentenceAnalyzer(Dictionary dizionario) {
-        this.dizionario = dizionario;
+    public SentenceAnalyzer(Dictionary dictionary) {
+        this.dictionary = dictionary;
     }
     public SentenceAnalyzer (){
-        this.dizionario = null;
+        this.dictionary = null;
     }
 
     public List<String> analyze(InputSentence frase) throws IOException {
@@ -40,8 +40,8 @@ public class SentenceAnalyzer {
                 String parola = token.getText().getContent().toLowerCase();
                 String etichetta = token.getPartOfSpeech().getTag().name();
                 words.add(parola);
-                if (dizionario != null) {
-                    dizionario.salvaParola(etichetta, parola);
+                if (dictionary != null) {
+                    dictionary.salvaParola(etichetta, parola);
                 }
             }
             return words;

@@ -1,0 +1,16 @@
+
+questo è il file scaricato con la kiave api di google.
+Il prof dovra scaricare il file con la sua chiave api, che sara un file json del tipo: nonsense-key-abc123.json
+Dovrà rinominarlo in google-key.json
+e metterlo nel progetto al posto di questo file (dovrà essere cancellato questo file)
+
+
+Cosa scrivere sul readme/manuale
+
+Configurazione Google Cloud API:
+Per usare l'API di analisi grammaticale e moderazione, è necessario avere una chiave Google.
+
+1. Accedi alla [Google Cloud Console](https://console.cloud.google.com/).
+2. Crea un progetto, abilita **Cloud Natural Language API**.
+3. Crea una **Service Account** e scarica il file `google-key.json`.
+4. Copia `google-key.json` nella root del progetto (⚠️ **non va su GitHub**).

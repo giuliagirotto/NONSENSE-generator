@@ -1,8 +1,8 @@
 package com.nonsense.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-import org.hibernate.engine.internal.Collections;
 
 public class NonsenseSentence {
     private final List<Word> words;
@@ -19,7 +19,7 @@ public class NonsenseSentence {
     public String toString() {
         String sentence = words.stream()
             .map(Word::getText)
-            .collect(Collections.joining(" "));
+            .collect(Collectors.joining(" "));
 
         if (!sentence.isEmpty()){
             sentence = sentence.substring(0,1).toUpperCase() + sentence.substring(1) + ".";

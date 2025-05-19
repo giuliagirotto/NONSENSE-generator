@@ -1,3 +1,4 @@
+import io.github.cdimascio.dotenv.Dotenv;
 package com.nonsense;
 
 import com.google.gson.Gson;
@@ -11,6 +12,10 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+        // Carica .env e imposta la variabile per l'autenticazione
+        Dotenv dotenv = Dotenv.load();
+        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", dotenv.get("GOOGLE_APPLICATION_CREDENTIALS"));
+
         port(4567);
 
         // Serve static files (HTML/JS/CSS)
@@ -41,22 +46,23 @@ public class Main {
                     if (allWords.size() == n) break;
                 }
             }
-}
+        }
 
-// Ora genera le frasi nonsense usando allWords
-SentenceGenerator generator = new SentenceGenerator(n);
-List<NonsenseSentence> generated = generator.generate(allWords, dictionary);
-
-            SentenceModerator moderator = new SentenceModerator();
-            List<String> results = new ArrayList<>();
-            for (NonsenseSentence s : generated) {
-                if (moderator.validate(s)) {
-                    results.add(s.toString());
-                }
+        // Ora genera le frasi nonsense usando allWords
+        NumberOutputSentences numberOutput = (NumberOutputSentences) (Object) n;
+        SentenceGenerator generator = new SentenceGenerator(numberOutput);
+        List<NonsenseSentence> generated = generator.generate(allWords, dictionary);
+        
+        SentenceModerator moderator = new SentenceModerator();
+        List<String> results = new ArrayList<>();
+        for (NonsenseSentence s : generated) {
+            if (moderator.validate(s)) {
+                results.add(s.toString());
             }
+        }
 
-            response.type("application/json");
-            return gson.toJson(results);
+        response.type("application/json");
+        return gson.toJson(results);
         });
     }
 }
