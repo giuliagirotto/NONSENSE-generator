@@ -2,50 +2,57 @@ package com.nonsense.core;
 
 import com.google.cloud.language.v1.*;
 import com.google.cloud.language.v1.Document.Type;
-import com.nonsense.model.Dictionary;
-import com.nonsense.model.InputSentence;
 
 import java.io.IOException;
-import java.util.List;
 
+/**
+ * Analizza la sintassi di una frase e riempie un TemporaryLexicon
+ * con nouns, verbs e adjectives estratti.
+ */
 public class SentenceAnalyzer {
 
-    private final Dictionary dictionary;
+    /**
+     * Estrae tutti i token grammaticali e li aggiunge al lexicon.
+     *
+     * @param text   frase da analizzare
+     * @param lexicon TemporaryLexicon da popolare in memoria
+     * @throws IOException in caso di errore con l'API
+     */
+    public void analyzeSyntax(String text, TemporaryLexicon lexicon) throws IOException {
+        // Creo il documento plain-text
+        Document doc = Document.newBuilder()
+            .setContent(text)
+            .setType(Type.PLAIN_TEXT)
+            .build();
 
-    public SentenceAnalyzer(Dictionary dictionary) {
-        this.dictionary = dictionary;
-    }
-    public SentenceAnalyzer (){
-        this.dictionary = null;
-    }
+        // Chiamo l'API
+        try (LanguageServiceClient client = LanguageServiceClient.create()) {
+            AnalyzeSyntaxRequest req = AnalyzeSyntaxRequest.newBuilder()
+                .setDocument(doc)
+                .setEncodingType(EncodingType.UTF16)
+                .build();
 
-    public List<String> analyze(InputSentence frase) throws IOException {
-        try (LanguageServiceClient language = LanguageServiceClient.create()) {
+            AnalyzeSyntaxResponse res = client.analyzeSyntax(req);
 
-            Document doc = Document.newBuilder()
-                    .setContent(frase.toString())
-                    .setType(Type.PLAIN_TEXT)
-                    .build();
+            // Per ogni token, controllo il tag e lo aggiungo al lexicon
+            for (Token token : res.getTokensList()) {
+                String word = token.getText().getContent().toLowerCase();
+                PartOfSpeech.Tag tag = token.getPartOfSpeech().getTag();
 
-            AnalyzeSyntaxRequest request = AnalyzeSyntaxRequest.newBuilder()
-                    .setDocument(doc)
-                    .setEncodingType(EncodingType.UTF16)
-                    .build();
-
-            AnalyzeSyntaxResponse response = language.analyzeSyntax(request);
-            List<Token> tokens = response.getTokensList();
-
-            List<String> words = new java.util.ArrayList<>();
-            for (Token token : tokens) {
-                String parola = token.getText().getContent().toLowerCase();
-                String etichetta = token.getPartOfSpeech().getTag().name();
-                words.add(parola);
-                if (dictionary != null) {
-                    dictionary.salvaParola(etichetta, parola);
+                switch (tag) {
+                    case NOUN:
+                        lexicon.addNoun(word);
+                        break;
+                    case VERB:
+                        lexicon.addVerb(word);
+                        break;
+                    case ADJ:
+                        lexicon.addAdjective(word);
+                        break;
+                    default:
+                        // ignoro altri tipi
                 }
             }
-            return words;
         }
     }
 }
-// In questo esempio, la classe SentenceAnalyzer utilizza il client di Google Cloud Natural Language API per analizzare una frase.
