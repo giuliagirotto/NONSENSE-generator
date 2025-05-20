@@ -1,4 +1,3 @@
-import io.github.cdimascio.dotenv.Dotenv;
 package com.nonsense;
 
 import com.google.gson.Gson;
@@ -12,10 +11,6 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        // Carica .env e imposta la variabile per l'autenticazione
-        Dotenv dotenv = Dotenv.load();
-        System.setProperty("GOOGLE_APPLICATION_CREDENTIALS", dotenv.get("GOOGLE_APPLICATION_CREDENTIALS"));
-
         port(4567);
 
         // Serve static files (HTML/JS/CSS)
@@ -27,16 +22,22 @@ public class Main {
 
             String inputSentence = (String) body.get("sentence");
             int n = ((Double) body.get("count")).intValue();
-            String dictionaries = "dictionaries";
+            String dictionaries = "dictionaries"; // Path to the dictionaries directory
 
             InputSentence sentence = new InputSentence(inputSentence);
             SentenceAnalyzer analyzer = new SentenceAnalyzer();
-            List<String> analyzedWords = analyzer.analyze(sentence); // Ottieni parole dalla frase di partenza
-
+            TemporaryLexicon tempLexicon = new TemporaryLexicon(); // Create a TemporaryLexicon instance
+            analyzer.analyzeSyntax(sentence.toString(), tempLexicon); // Pass String and TemporaryLexicon
+            /*
+            List<String> allNoun = tempLexicon.getAllNoun(); // Retrieve analyzed words from TemporaryLexicon
+            List<String> allVerb = tempLexicon.getAllVerb(); // Retrieve analyzed verbs from TemporaryLexicon
+            List<String> allAdj = tempLexicon.getAllAdj(); // Retrieve analyzed adj from TemporaryLexicon
+            */
+            
             com.nonsense.model.Dictionary dictionary = new com.nonsense.model.Dictionary(dictionaries);
+           
+            /*
             List<String> dictionaryWords = dictionary.getWordsByTipe(); // Ottieni parole dal dizionario
-
-            List<String> allWords = new ArrayList<>(analyzedWords);
 
             // Aggiungi parole dal dizionario se servono
             while (allWords.size() < n) {
@@ -46,23 +47,24 @@ public class Main {
                     if (allWords.size() == n) break;
                 }
             }
-        }
-
-        // Ora genera le frasi nonsense usando allWords
-        NumberOutputSentences numberOutput = (NumberOutputSentences) (Object) n;
-        SentenceGenerator generator = new SentenceGenerator(numberOutput);
-        List<NonsenseSentence> generated = generator.generate(allWords, dictionary);
-        
-        SentenceModerator moderator = new SentenceModerator();
-        List<String> results = new ArrayList<>();
-        for (NonsenseSentence s : generated) {
-            if (moderator.validate(s)) {
-                results.add(s.toString());
             }
-        }
+            */
+            // Ora genera le frasi nonsense usando tempLexicon
+            NumberOutputSentences numberOutput = (NumberOutputSentences) (Object) n;
+            SentenceGenerator generator = new SentenceGenerator(numberOutput);
+            List<NonsenseSentence> generated = generator.generate(tempLexicon, dictionary);
 
-        response.type("application/json");
-        return gson.toJson(results);
-        });
+        
+            SentenceModerator moderator = new SentenceModerator();
+            List<String> results = new ArrayList<>();
+            for (NonsenseSentence s : generated) {
+                if (moderator.validate(s)) {
+                results.add(s.toString());
+                }
+            }
+
+            response.type("application/json");
+            return gson.toJson(results);
+            });
     }
 }
