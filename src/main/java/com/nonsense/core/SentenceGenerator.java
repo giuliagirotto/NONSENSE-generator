@@ -31,8 +31,7 @@ public class SentenceGenerator {
      * @param permDict Dictionary permanente (cartella “dictionaries”)
      * @return lista di NonsenseSentence
      */
-    public List<NonsenseSentence> generate(TemporaryLexicon lexicon,
-                                           Dictionary permDict) throws IOException {
+    public List<NonsenseSentence> generate(TemporaryLexicon lexicon, Dictionary permDict) throws IOException {
         List<NonsenseSentence> sentences = new ArrayList<>();
 
         for (int i = 0; i < numberOutput.getValue(); i++) {
@@ -46,14 +45,13 @@ public class SentenceGenerator {
             // 2) Verbo
             wordList.add(pickWord("VERB", lexicon, permDict, usedTexts));
             // 3) Aggettivo
-            wordList.add(pickWord("ADJ",  lexicon, permDict, usedTexts));
+            wordList.add(pickWord("ADJECTIVE",  lexicon, permDict, usedTexts));
             // 4) Sostantivo 2
             wordList.add(pickWord("NOUN", lexicon, permDict, usedTexts));
 
             // Creo la NonsenseSentence con la lista di Word
             sentences.add(new NonsenseSentence(wordList));
         }
-
         return sentences;
     }
 
@@ -68,10 +66,7 @@ public class SentenceGenerator {
      * @param usedTexts parole già usate nella frase corrente
      * @return Word pronta per essere inserita in NonsenseSentence
      */
-    private Word pickWord(String tag,
-                          TemporaryLexicon lexicon,
-                          Dictionary permDict,
-                          Set<String> usedTexts) throws IOException {
+    private Word pickWord(String tag, TemporaryLexicon lexicon, Dictionary permDict, Set<String> usedTexts) throws IOException {
         WordType type = WordType.valueOf(tag);
         String text = null;
 
@@ -83,7 +78,7 @@ public class SentenceGenerator {
             case VERB:
                 text = lexicon.consumeRandomVerb();
                 break;
-            case ADJECTIVE:
+            case ADJ:
                 text = lexicon.consumeRandomAdjective();
                 break;
             default:
