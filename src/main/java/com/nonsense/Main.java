@@ -7,6 +7,7 @@ import com.nonsense.model.*;
 import static spark.Spark.*;
 
 import java.util.*;
+import java.io.IOException;
 
 public class Main {
 
@@ -18,6 +19,9 @@ public class Main {
 
         post("/generate", (request, response) -> {
             Gson gson = new Gson();
+            
+            try{
+            
             Map<String, Object> body = gson.fromJson(request.body(), new com.google.gson.reflect.TypeToken<Map<String, Object>>(){}.getType());
 
             String inputSentence = (String) body.get("sentence");
@@ -50,7 +54,7 @@ public class Main {
             }
             */
             // Ora genera le frasi nonsense usando tempLexicon
-            NumberOutputSentences numberOutput = (NumberOutputSentences) (Object) n;
+            NumberOutputSentences numberOutput = new NumberOutputSentences(n);
             SentenceGenerator generator = new SentenceGenerator(numberOutput);
             List<NonsenseSentence> generated = generator.generate(tempLexicon, dictionary);
 
@@ -65,6 +69,23 @@ public class Main {
 
             response.type("application/json");
             return gson.toJson(results);
+            } 
+            catch (IOException e) {
+                // GESTIONE DELL’ERRORE DI IO
+                response.type("application/json");
+                response.status(500);
+                Map<String, String> err = new HashMap<>();
+                err.put("error", "Errore di analisi sintattica: " + e.getMessage());
+                return gson.toJson(err);
+            }
+            catch (IllegalStateException e) {
+                // GESTIONE CASI DI FALLBACK VUOTO
+                response.type("application/json");
+                response.status(400);
+                Map<String, String> err = new HashMap<>();
+                err.put("error", e.getMessage());
+                return gson.toJson(err);
+            }
             });
     }
 }
