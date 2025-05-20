@@ -27,7 +27,7 @@ public class Word {
         if(this == obj) return true;
         if(obj == null || getClass() != obj.getClass()) return false;
 
-        Word word = (word) obj;
+        Word word = (Word) obj;
         return text.equalsIgnoreCase(word.text) && type == word.type;
     }
 }
